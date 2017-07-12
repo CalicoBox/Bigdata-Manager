@@ -17,9 +17,6 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
 
         init: function () {
             this.initEvent();
-            // this.getUser();
-            // this.getDB();
-            this.getHive();
         },
 
         initEvent: function () {
@@ -154,9 +151,8 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                         + '</a>');
                 }
             });
-
-            $(".closeModal").click(function () {
-                $(this).parents(".modal-dialog").find("input").val("");
+            $(".modal").on('hidden.bs.modal', function () {
+                $(this).find("input").val("");   
             })
             //////////////////////
             //添加联系人
@@ -212,19 +208,16 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                     $("#dbjiancheng").val($("#DBName").val());
                     $("#addDBModal").modal("hide");
                 } else {
-                    $.showModal();
-                    $("#DBConfForm input").val("");
                     $("#addDBModal").modal("hide");
                 }
             });
+            ///////////////////
+            //选取字段
+            ///////////////////
+            $("")
 
-
-            $("#zifenpian").delegate(".tableInput", "click", function () {
-                if ($(this).attr("data-flag") == "false") {
-                    var kuId = $(this).attr("data-kuId");
-                    _this.getTable(kuId, $(this));
-                    $(this).attr("data-flag", "true")
-                }
+            $("#zifenpian").delegate(".choiceTableBtn", "click", function () {
+                _this.getTable($(this).val());
             });
 
             $("#saveInfo").click(function () {
@@ -445,180 +438,133 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
         },
 
 
-        getDB: function () {
-            var _this = this;
-            showloading(true);
-            $.ajax({
-                type: "get",
-                url: "/sentosa/metadata/group/all",
-                data: {
-                    //groupId:$("#leftKu").find("i.text-light-blue").parent().attr("data-id")
-                },
-                success: function (result) {
-                    showloading(false);
-                    if (result && result.success) {
-                        var dat = result.pairs.dat;
-                        $("#dbjiancheng").quickSearch({
-                            data: dat,
-                            text: "name",
-                            value: "id",
-                            width: "400px"
-                        });
-                        $("#dbjiancheng").changeValue(function () {
-                            var id = $(this).attr("data-value");
-                            var isMulti = $(this).next().find("li.selected").attr("data-isMulti");
-                            if (isMulti == "1") {
-                                $(".zifenpianfa").hide();
-                            } else {
-                                $(".zifenpianfa").show();
-                            }
-                            _this.getKu(id);
-                        });
-                    } else {
-                        $.showModal({content: "查询失败"});
-                    }
-                },
-                error: function (a, b, c) {
-                    showloading(false);
-                    alert(a.responseText);
-                }
-            });
-        },
+        // getDB: function () {
+        //     var _this = this;
+        //     showloading(true);
+        //     $.ajax({
+        //         type: "get",
+        //         url: "/sentosa/metadata/group/all",
+        //         data: {
+        //             //groupId:$("#leftKu").find("i.text-light-blue").parent().attr("data-id")
+        //         },
+        //         success: function (result) {
+        //             showloading(false);
+        //             if (result && result.success) {
+        //                 var dat = result.pairs.dat;
+        //                 $("#dbjiancheng").quickSearch({
+        //                     data: dat,
+        //                     text: "name",
+        //                     value: "id",
+        //                     width: "400px"
+        //                 });
+        //                 $("#dbjiancheng").changeValue(function () {
+        //                     var id = $(this).attr("data-value");
+        //                     var isMulti = $(this).next().find("li.selected").attr("data-isMulti");
+        //                     if (isMulti == "1") {
+        //                         $(".zifenpianfa").hide();
+        //                     } else {
+        //                         $(".zifenpianfa").show();
+        //                     }
+        //                     _this.getKu(id);
+        //                 });
+        //             } else {
+        //                 $.showModal({content: "查询失败"});
+        //             }
+        //         },
+        //         error: function (a, b, c) {
+        //             showloading(false);
+        //             alert(a.responseText);
+        //         }
+        //     });
+        // },
 
-        getKu: function (id) {
-            var _this = this;
-            showloading(true);
-            $.ajax({
-                type: "get",
-                url: "/sentosa/metadata/group/db/list",
-                data: {
-                    groupId: id
-                },
-                success: function (result) {
-                    showloading(false);
-                    if (result && result.success) {
-                        var dat = result.pairs.dat;
-                        _this.setKutable(dat);
-                    } else {
-                        $.showModal({content: "查询失败"});
-                    }
-                },
-                error: function (a, b, c) {
-                    showloading(false);
-                    alert(a.responseText);
-                }
-            });
-        },
+        // getKu: function (id) {
+        //     var _this = this;
+        //     showloading(true);
+        //     $.ajax({
+        //         type: "get",
+        //         url: "/sentosa/metadata/group/db/list",
+        //         data: {
+        //             groupId: id
+        //         },
+        //         success: function (result) {
+        //             showloading(false);
+        //             if (result && result.success) {
+        //                 var dat = result.pairs.dat;
+        //                 _this.setKutable(dat);
+        //             } else {
+        //                 $.showModal({content: "查询失败"});
+        //             }
+        //         },
+        //         error: function (a, b, c) {
+        //             showloading(false);
+        //             alert(a.responseText);
+        //         }
+        //     });
+        // },
 
-        setKutable: function (dat) {
-            var zifenpian = $("#zifenpian");
-            zifenpian.html("");
-            $("#yuanElm").html("");
-            $("#selectedElm").html("");
-            for (var i = 0; i < dat.length; i++) {
-                zifenpian.append('<tr>'
-                    + '<td style="width:36px;">'
-                    + '<div class="radio">'
-                    + '<label>'
-                    + '<input type="radio" name="optionsRadios">'
-                    + '</label>'
-                    + '</div>'
-                    + '</td>'
-                    + '<td>'
-                    + '<div class="col-sm-12 input-group-sm">'
-                    + '<input type="text" class="form-control" value="' + dat[i].jdbcUrl + '" placeholder="" readonly>'
-                    + '</div>'
-                    + '</td>'
-                    + '<td>'
-                    + '<div class="col-sm-12 input-group-sm">'
-                    + '<input type="text" class="form-control tableInput" data-flag="false" data-kuId="' + dat[i].id + '" placeholder="">'
-                    + '<input type="hidden" value="' + dat[i].driverType + '" placeholder="">'
-                    + '<input type="hidden" value="' + dat[i].userName + '" placeholder="">'
-                    + '<input type="hidden" value="' + dat[i].password + '" placeholder="">'
-                    + '<span class="glyphicon glyphicon-search quickSearchIcon"></span>'
-                    + '</div>'
-                    + '</td>'
-                    + '</tr>');
-            }
-        },
-
-        getTable: function (id, $obj) {
-            var _this = this;
-            showloading(true);
-            $.ajax({
-                type: "get",
-                url: "/sentosa/metadata/db/outer/table/list",
-                data: {
-                    dbId: id
-                },
-                success: function (result) {
-                    showloading(false);
-                    if (result && result.success) {
-                        var dat = result.pairs.dat;
-                        var _dat = [];
-                        for (var i = 0; i < dat.length; i++) {
-                            var d = {};
-                            d.name = dat[i];
-                            _dat.push(d);
-                        }
-                        $obj.quickSearch({
-                            data: _dat,
-                            text: "name",
-                            value: "name",
-                            width: "400px"
-                        });
-                        if ($obj.parent().parent().parent().index() == 0) {
-                            $obj.changeValue(function () {
-                                var value = $(this).attr("data-value");
-                                var kuId = $(this).attr("data-kuId");
-                                _this.getTableElm(value, kuId);
-                            });
-                        }
-                        $obj.blur();
-                        $obj.focus();//为了出发quicksearch的focus事件
-
-                    } else {
-                        $.showModal({content: "查询失败"});
-                    }
-                },
-                error: function (a, b, c) {
-                    showloading(false);
-                    alert(a.responseText);
-                }
-            });
-        },
-
-        getTableElm: function (tableName, dbId) {
-            var _this = this;
-            showloading(true);
-            $.ajax({
-                type: "get",
-                url: "/sentosa/metadata/db/outer/column/list",
-                data: {
-                    tableName: tableName,
-                    dbId: dbId
-                },
-                success: function (result) {
-                    showloading(false);
-                    if (result && result.success) {
-                        var dat = result.pairs.dat;
-                        $("#fenquziduan").quickSearch({
-                            data: dat,
-                            text: "name",
-                            value: "isPartition",
-                            width: "400px"
-                        });
-                        _this.setTableElm(dat);
-                    } else {
-                        $.showModal({content: "查询失败"});
-                    }
-                },
-                error: function (a, b, c) {
-                    showloading(false);
-                    alert(a.responseText);
-                }
-            });
-        },
+        // setKutable: function (dat) {
+        //     var zifenpian = $("#zifenpian");
+        //     zifenpian.html("");
+        //     $("#yuanElm").html("");
+        //     $("#selectedElm").html("");
+        //     for (var i = 0; i < dat.length; i++) {
+        //         zifenpian.append('<tr>'
+        //             + '<td style="width:36px;">'
+        //             + '<div class="radio">'
+        //             + '<label>'
+        //             + '<input type="radio" name="optionsRadios">'
+        //             + '</label>'
+        //             + '</div>'
+        //             + '</td>'
+        //             + '<td>'
+        //             + '<div class="col-sm-12 input-group-sm">'
+        //             + '<input type="text" class="form-control" value="' + dat[i].jdbcUrl + '" placeholder="" readonly>'
+        //             + '</div>'
+        //             + '</td>'
+        //             + '<td>'
+        //             + '<div class="col-sm-12 input-group-sm">'
+        //             + '<input type="text" class="form-control tableInput" data-flag="false" data-kuId="' + dat[i].id + '" placeholder="">'
+        //             + '<input type="hidden" value="' + dat[i].driverType + '" placeholder="">'
+        //             + '<input type="hidden" value="' + dat[i].userName + '" placeholder="">'
+        //             + '<input type="hidden" value="' + dat[i].password + '" placeholder="">'
+        //             + '<span class="glyphicon glyphicon-search quickSearchIcon"></span>'
+        //             + '</div>'
+        //             + '</td>'
+        //             + '</tr>');
+        //     }
+        // },
+        // getTableElm: function (tableName, dbId) {
+        //     var _this = this;
+        //     showloading(true);
+        //     $.ajax({
+        //         type: "get",
+        //         url: "/sentosa/metadata/db/outer/column/list",
+        //         data: {
+        //             tableName: tableName,
+        //             dbId: dbId
+        //         },
+        //         success: function (result) {
+        //             showloading(false);
+        //             if (result && result.success) {
+        //                 var dat = result.pairs.dat;
+        //                 $("#fenquziduan").quickSearch({
+        //                     data: dat,
+        //                     text: "name",
+        //                     value: "isPartition",
+        //                     width: "400px"
+        //                 });
+        //                 _this.setTableElm(dat);
+        //             } else {
+        //                 $.showModal({content: "查询失败"});
+        //             }
+        //         },
+        //         error: function (a, b, c) {
+        //             showloading(false);
+        //             alert(a.responseText);
+        //         }
+        //     });
+        // },
 
         getHiveTableElm: function (tableId) {
             var _this = this;
@@ -644,26 +590,6 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                 }
             });
         },
-
-        setTableElm: function (dat) {
-            $("#yuanElm").empty();
-            $("#selectedElm").empty();
-            for (var i = 0; i < dat.length; i++) {
-                var str = '<tr>'
-                    + '<td>' + dat[i].name + '</td>'
-                    + '<td>' + dat[i].type + '</td>'
-                    + '</tr>';
-                $("#yuanElm").append(str);
-            }
-
-            $("#qiefenziduan").quickSearch({
-                data: dat,
-                text: "name",
-                value: "id",
-                width: "400px"
-            });
-        },
-
         setHiveTableElm: function (dat) {
             $("#hiveElm").empty();
             $("#selectedElm").empty();
@@ -685,7 +611,6 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                 $(".fenquOperate").hide();
             }
         },
-
         getUser: function (loginName) {
             var _this = this;
             showloading(true);
@@ -710,7 +635,6 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                 }
             });
         },
-
         setUserDig: function (data) {
             $(".myuserUl").empty();
             for (var elem in data) {
@@ -718,7 +642,6 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                 $(".myuserUl").append('<li><a data-id="' + userinfo.id + '" data-loginName="' + userinfo.loginname + '" data-trueName="' + userinfo.truename + '" href="javascript:void(0);">' + userinfo.truename + '  ' + userinfo.email + ' ' + userinfo.groupname + '</a></li>');
             }
         },
-
         getDB: function (conf) {
             var _this = this;
             showloading(true);
@@ -751,12 +674,43 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                 }
             });
         },
-
         setDBDig: function (data) {
             $("#zifenpian").empty();
             for (var elem in data) {
                 var table = data[elem][0];
-                $("#zifenpian").append('<tr><td><div class="input-group"><span class="input-group-addon"><input type="radio" name="optionsRadios" value="1"></span><input type="text" class="form-control text-center" data-kuId="1" placeholder="" readonly="readonly" value="'+table+'"><span class="input-group-addon"><span class="glyphicon glyphicon-align-justify seeTableDescBtn"></span></span></div></td></tr>');
+                $("#zifenpian").append('<tr><td><div class="input-group"><span class="input-group-addon"><input class="choiceTableBtn" type="radio" name="optionsRadios" value="'+table+'"></span><input type="text" class="form-control text-center" data-kuId="1" placeholder="" readonly="readonly" value="'+table+'"><span class="input-group-addon"><span class="glyphicon glyphicon-align-justify seeTableDescBtn"></span></span></div></td></tr>');
+            }
+        },
+        getTable: function (table) {
+            var _this = this;
+            showloading(true);
+            $.ajax({
+                type: "get",
+                url: "/channel/GetTableDesc",
+                data: {
+                    table: table,
+                },
+                success: function (result) {
+                    showloading(false);
+                    if (result && result.success) {
+                        _this.setTableElm(result.tableDesc);
+                    } else {
+                        $.showModal({content: "查询失败"});
+                    }
+                },
+                error: function (a, b, c) {
+                    showloading(false);
+                    alert(a.responseText);
+                }
+            });
+        },
+        setTableElm: function (desc) {
+            $("#yuanElm").empty();
+            $("#selectedElm").empty();
+            for (var elem in desc) {
+                var field = desc[elem][0];
+                var fieldType = desc[elem][1];
+                $("#yuanElm").append('<tr>'+'<td>'+ field+'</td>'+'<td>'+fieldType+'</td>'+'</tr>');
             }
         },
 

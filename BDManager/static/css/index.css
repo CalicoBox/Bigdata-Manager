@@ -117,6 +117,7 @@ input,textarea{
     box-shadow: none;
 }
 .mybox{
+    height: 10em;
     border:1px solid #d2d6de;
 }
 .mybox table th,.mybox table td{
@@ -242,10 +243,11 @@ select {
     overflow-y: scroll;
 }
 .myButton{
+    float: right;
     width: 43px;
     float: right;
     padding: 1px 2px;
-    margin-left: 11px;
+    margin-left: 0.5em;
 }
 .myopeDiv{
     width:50px;
@@ -280,6 +282,14 @@ select {
 .mybox .input-group-sm > .form-control.jingduinput{
     width: 40%;
     float: left;
+    position: relative;
+}
+.fieldBox {
+    height: 15em;
+}
+.fieldBox .box-body {
+    height: 13em;
+    overflow: auto;
 }
 .selectUsers .btn-app{
     height: 30px;

@@ -25,21 +25,43 @@ def GetDBConnect(request):
   try:
     conn=MySQLdb.connect(host=conf['URL'],user=conf['account'],passwd=conf['passwd'],db=conf['DBName'],port=int(conf['port']))
     cur=conn.cursor()
-    cur.execute('show tables;')
     tables = cur.fetchmany(cur.execute("show tables;"))
     tables_info = list()
     for table in tables:
       tables_info.append(table)
     cur.close()
-    conn.commit()
     conn.close()
     res['success'] = True
     res['tables'] = tables_info
+    request.session.set_expiry(0)
+    request.session['dbconf'] = conf
     return JsonResponse(res)
   except MySQLdb.Error,e:
     err = "Mysql Error %d: %s" % (e.args[0], e.args[1])
     res['success'] = False
     res['err'] = err
     return JsonResponse(res)
-      
+
+def GetTableDesc(request):
+  table = request.GET['table']
+  conf = request.session['dbconf']
+  res = dict()
+  try:
+    conn=MySQLdb.connect(host=conf['URL'],user=conf['account'],passwd=conf['passwd'],db=conf['DBName'],port=int(conf['port']))
+    cur=conn.cursor()
+    tableDesc = cur.fetchmany(cur.execute('desc '+table+';'))
+    tableDesc_info = list()
+    for elem in tableDesc:
+      tableDesc_info.append(elem)
+    cur.close()
+    conn.close()
+    res['success'] = True
+    res['tableDesc'] = tableDesc_info
+    request.session['table'] = table
+    return JsonResponse(res)
+  except MySQLdb.Error,e:
+    err = "Mysql Error %d: %s" % (e.args[0], e.args[1])
+    res['success'] = False
+    res['err'] = err
+    return JsonResponse(res)
   
