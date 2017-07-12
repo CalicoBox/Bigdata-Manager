@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<body class="sidebar-mini skin-purple wysihtml5-supported">
+<div class="content-wrapper">
+	<section class="content">
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a>数据通道</a></li>
+				<li class="active">导出</li>
+				<li class="active">DB导出</li>
+			</ol>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="box  box-table">
+					<div class="box-header with-border">
+						<div class="mytableTop">
+							<h3 class="box-title">任务列表</h3>
+							<i class="fa fa-fw fa-plus pull-right" id="addChannel"></i>
+						</div>
+					</div>
+					<div class="box-body mytable">
+						<table class="table table-bordered">
+							<thead>
+							<tr>
+								<th>任务名称</th>
+								<th>表名</th>
+								<th>负责人</th>
+								<th>描述</th>
+								<th>创建时间</th>
+								<th>操作</th>
+							</tr>
+							<tr class="searchTh">
+								<th><input type="text" id="taskName"/></th>
+								<th><input type="text" id="tableName"/></th>
+								<th><input type="text" id="fuzeren"/></th>
+								<th><input type="text" id="desc"/></th>
+								<th></th>
+								<th></th>
+							</tr>
+							</thead>
+							<tbody id="dblistTable">
+							</tbody></table>
+					</div><!-- /.box-body -->
+					<div class="box-footer clearfix">
+						<ul class="pagination pagination-sm no-margin pull-right">
+							<li><a href="javascript:void(0);" id="prevPage">上一页</a></li>
+							<li><a href="javascript:void(0);" id="nextPage">下一页</a></li>
+						</ul>
+						当前页数：<small id="currentPageNum">0</small>
+						总页数：<small id="totalPageNum">0</small>
+						总数：<small id="totalNum">0</small>
+					</div>
+				</div>
+			</div><!-- /.col -->
+		</div>
+	</section>
+</div>
+</body>
+<script src="../..//js/channel/exportDBList.js"></script>
+</html>

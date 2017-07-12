@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<body class="sidebar-mini skin-purple wysihtml5-supported">
+<div>
+	<section class="content">
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a>数据通道</a></li>
+				<li class="active">数据上传</li>
+			</ol>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="box  box-table">
+					<div class="box-header with-border">
+						<div class="mytableTop">
+							<h3 class="box-title">数据上传</h3>
+							<i class="fa fa-fw fa-plus pull-right" id="addTask"></i>
+						</div>
+					</div>
+					<div class="box-body dingzhitable ">
+						<table class="table table-bordered">
+							<thead>
+							<tr>
+								<th>任务名称</th>
+								<th>表名</th>
+								<th>创建时间</th>
+								<th>负责人</th>
+								<th>描述</th>
+								<th></th>
+							</tr>
+							<tr class="searchTh">
+								<th><input type="text" id="taskName"/></th>
+								<th><input type="text" id="tableName"/></th>
+								<th><input type="text" id="createTime"/></th>
+								<th><input type="text" id="creator"/></th>
+								<th><input type="text" id="desc"/></th>
+								<th></th>
+							</tr>
+							</thead>
+							<tbody id="dblistTable">
+							<!--<tr>-->
+							<!--<td>001</td>-->
+							<!--<td>imp_o_m_t_readsfasdfsdaserve_dl</td>-->
+							<!--<td>订单基础表fasdfasdfsdasda抽取</td>-->
+							<!--<td>xxxxxsddasdfasdddsdasdaxxx</td>-->
+							<!--<td>xxxxxasdfasdfaasdfasdaasdfasdfadxxx</td>-->
+							<!--<td>xxxxxsfassdfasddfadxxx</td>-->
+							<!--<td>xxxxxsfadfasdfsfadsfxxx</td>-->
+							<!--<td>06:05</td>-->
+							<!--<td>天</td>-->
+							<!--<td>孙铮</td>-->
+							<!--<td style="width:120px;">-->
+							<!--<i class="fa fa-fw fa-cog pull-left myfabut faDisabled"></i>-->
+							<!--<i class="fa fa-fw fa-play pull-left myfabut"></i>-->
+							<!--<i class="fa fa-fw fa-arrow-circle-up pull-left myfabut"></i>-->
+							<!--<i class="fa fa-fw fa-arrow-circle-down pull-left myfabut"></i>-->
+							<!--<i class="fa fa-fw fa-times pull-left myfabut"></i>-->
+							<!--</td>-->
+							<!--</tr>-->
+							</tbody>
+						</table>
+					</div><!-- /.box-body -->
+					<div class="box-footer clearfix">
+						<ul class="pagination pagination-sm no-margin pull-right">
+							<li><a href="javascript:void(0);" id="prevPage">上一页</a></li>
+							<li><a href="javascript:void(0);" id="nextPage">下一页</a></li>
+						</ul>
+						当前页数：<small id="currentPageNum">0</small>
+						总页数：<small id="totalPageNum">0</small>
+						总数：<small id="totalNum">0</small>
+					</div>
+				</div>
+			</div><!-- /.col -->
+		</div>
+	</section>
+</div>
+
+</body>
+<script src="../..//js/channel/uploadList.js"></script>
+</html>

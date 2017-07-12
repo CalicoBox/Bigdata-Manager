@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <body class="sidebar-mini skin-purple wysihtml5-supported">
+      <div>
+          <section class="content">
+              <div class="row">
+                  <ol class="breadcrumb">
+                      <li><a>用户标签管理</a></li>
+                      <li class="active">标签管理</li>
+                  </ol>
+              </div>
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="box  box-table">
+                          <div class="box-header with-border">
+                              <div class="mytableTop">
+                                  <h3 class="box-title">标签列表</h3>
+                                  <i class="fa fa-fw fa-plus pull-right" id="addTag"></i>
+                              </div>
+                          </div>
+                          <div class="box-body dingzhitable ">
+                              <table class="table table-bordered">
+                                  <thead>
+                                      <tr>
+                                          <th>标签名称</th>
+                                          <th>标签类别</th>
+                                          <th>用户标识字段</th>
+                                          <th>创建时间</th>
+                                          <th>描述</th>
+                                          <th></th>
+                                      </tr>
+                                      <tr class="searchTh">
+                                          <th><input type="text" id="name"/></th>
+                                          <th><input type="text" id="type"/></th>
+                                          <th><input type="text" id="joinColumnName"/></th>
+                                          <th><input type="text" id="createDate"/></th>
+                                          <th><input type="text" id="desc"/></th>
+                                          <th></th>
+                                      </tr>
+                                  </thead>
+                                  <tbody id="taglistTable">
+
+                                  </tbody>
+                              </table>
+                          </div><!-- /.box-body -->
+                          <div class="box-footer clearfix">
+                              <ul class="pagination pagination-sm no-margin pull-right">
+                                  <li><a href="javascript:void(0);" id="prevPage">上一页</a></li>
+                                  <li><a href="javascript:void(0);" id="nextPage">下一页</a></li>
+                              </ul>
+                              当前页数：<small id="currentPageNum">0</small>
+                              总页数：<small id="totalPageNum">0</small>
+                              总数：<small id="totalNum">0</small>
+                          </div>
+                      </div>
+                  </div><!-- /.col -->
+              </div>
+          </section>
+      </div>
+
+  </body>
+  <script src="/static/other/require/require_jquery-2.1.4.js"></script>
+  <script src="/static/js/requireConfig.js"></script>
+  <script src="/static/js/userTag/tagList.js"></script>
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<body class="sidebar-mini skin-purple wysihtml5-supported">
+<div>
+	<section class="content">
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a>数据通道</a></li>
+				<li><a href="channelList.html">导入</a></li>
+				<li class="active">DB导入Hive</li>
+			</ol>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="box">
+					<form class="form-horizontal">
+						<div class="box-body">
+							<div class="form-group col-sm-6" style="float: right; margin-bottom: 0px;">
+								<div class="col-sm-12">
+									<div class="box mybox fenpianbox" style="margin-bottom: 15px;">
+										<div class="box-body" style="overflow: auto; height: 14em; margin-bottom: 13px;">
+											<table class="table">
+												<!-- 子分片 -->
+												<tbody id="zifenpian">
+												<tr>
+													<td>
+														<div class="input-group">
+		      										<span class="input-group-addon">
+																<input type="radio" name="optionsRadios" value="1">
+		      										</span>
+															<input type="text" class="form-control text-center" data-kuId="1" placeholder="" readonly="readonly">
+															<span class="input-group-addon">
+																<span class="glyphicon glyphicon-align-justify seeTableDescBtn"></span>
+															</span>
+														</div>
+													</td>
+												</tr>
+												</tbody></table>
+										</div>
+									</div>
+								</div>
+								<!-- <div class="col-sm-1 zifenpianfa" >
+									<i class="fa fa-fw fa-plus-square" data-type="add"></i>
+									<i class="fa fa-fw fa-minus-square" data-type="del"></i>
+								</div> -->
+								<!-- <div class="col-sm-4"></div> -->
+							</div>
+							<div class="form-group col-sm-6">
+								<label class="col-sm-4 control-label">任务名</label>
+								<div class="col-sm-8 input-group-sm">
+									<input type="text" class="form-control" id="taskName" placeholder="">
+								</div>
+							</div>
+							<div class="form-group col-sm-6">
+								<label class="col-sm-4 control-label">负责人</label>
+								<div class="col-sm-8 input-group-sm">
+									<input type="text" class="form-control" id="userNames" readonly >
+									<span class="glyphicon glyphicon-plus quickSearchIcon" id="addUserBut"></span>
+								</div>
+							</div>
+							<div class="form-group col-sm-6">
+								<label class="col-sm-4 control-label">数据源</label>
+								<div class="col-sm-8 input-group-sm dropdown">
+									<input type="text" class="form-control" id="dbjiancheng" readonly>
+									<span class="glyphicon glyphicon-plus quickSearchIcon" id="confDBInfoBtn"></span>
+								</div>
+							</div>
+							<div class="form-group col-sm-6">
+								<label  class="col-sm-4 control-label">Hive库</label>
+								<div class="col-sm-8 input-group-sm">
+									<input type="text" class="form-control" id="hiveKu"  placeholder="">
+									<span class="glyphicon glyphicon-search quickSearchIcon"></span>
+								</div>
+							</div>
+							<div class="form-group col-sm-6">
+								<label  class="col-sm-4 control-label">Hive表</label>
+								<div class="col-sm-8 input-group-sm">
+									<input type="text" class="form-control" id="hivebiao" placeholder="">
+									<span class="glyphicon glyphicon-search quickSearchIcon"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label  class="col-sm-2 control-label"></label>
+								<div class="col-sm-3 input-group-sm">
+									<div class="box mybox operBox">
+										<div class="box-header">
+											<h3 class="box-title">源表</h3>
+										</div><!-- /.box-header -->
+										<div class="box-body no-padding dingzhitable">
+											<table class="table table-condensed">
+												<thead>
+													<tr>
+														<th>字段名</th>
+														<th>字段类型</th>
+													</tr>
+												</thead>
+												<tbody id="yuanElm">
+												</tbody></table>
+										</div><!-- /.box-body -->
+									</div>
+									<div>
+										<a class="btn  btn-default myButton" id="yuanElmAll">全选</a>
+										<a class="btn  btn-default myButton" id="toRight">右移</a>
+									</div>
+								</div>
+								<div class="col-sm-3 input-group-sm">
+									<div class="box mybox operBox">
+										<div class="box-header">
+											<h3 class="box-title">已选字段</h3>
+										</div><!-- /.box-header -->
+										<div class="box-body no-padding dingzhitable">
+											<table class="table table-condensed">
+												<thead>
+												<tr>
+													<th>字段名</th>
+													<th>字段类型</th>
+												</tr>
+												</thead>
+												<tbody id="selectedElm">
+												</tbody></table>
+										</div><!-- /.box-body -->
+									</div>	
+									<div>
+										<a class="btn  btn-default myButton" id="selectedElmAll">全选</a>
+										<a class="btn  btn-default myButton" id="selectedElmDown">下移</a>
+										<a class="btn  btn-default myButton" id="selectedElmUp">上移</a>
+										<a class="btn  btn-default myButton" id="toLeft">左移</a>
+									</div>
+								</div>
+								<div class="col-sm-3 input-group-sm">
+									<div class="box mybox oprshowBox">
+										<div class="box-header">
+											<h3 class="box-title">Hive表</h3>
+										</div><!-- /.box-header -->
+										<div class="box-body no-padding dingzhitable">
+											<table class="table table-condensed">
+												<thead>
+												<tr>
+													<th>字段名</th>
+													<th>字段类型</th>
+												</tr>
+												</thead>
+												<tbody id="hiveElm">
+
+												</tbody></table>
+										</div><!-- /.box-body -->
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label  class="col-sm-2 control-label">数据切分字段</label>
+								<div class="col-sm-3 input-group-sm">
+									<input type="text" class="form-control" id="qiefenziduan">
+									<span class="glyphicon glyphicon-search quickSearchIcon"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label  class="col-sm-2 control-label">数据量</label>
+								<div class="col-sm-3 input-group-sm">
+									<select class="myselect100" id="shujuliang">
+										<option value="2">50万以下</option>
+										<option value="4">50-100万</option>
+										<option value="8">100-500万</option>
+										<option value="16">500-1000万</option>
+										<option value="32">1000-3000万</option>
+									</select>
+								</div>
+								<div class="col-sm-1">
+									<div class="radio">
+										<label>
+											<input type="checkbox" name="gaoji" value="1" id="gaoji">高级
+										</label>
+									</div>
+								</div>
+								<div class="col-sm-3 input-group-sm">
+									<input type="text" class="form-control" style="display: none;"  placeholder=""  id="gaojiConfig">
+								</div>
+							</div>
+							<div class="form-group fenquOperate">
+								<label class="col-sm-2 control-label">分区表达式</label>
+								<div class="col-sm-2">
+									<div class="radio">
+										<label>
+											<input type="radio" class="fenquType" name="fenquType" value="0" checked>分区表达式
+										</label>
+									</div>
+								</div>
+								<div class="col-sm-2">
+									<div class="radio">
+										<label>
+											<input type="radio" class="fenquType" name="fenquType" value="1">动态分区
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group fenquOperate" id="fenqubiaodashi">
+								<label  class="col-sm-2 control-label">分区表达式</label>
+								<div class="col-sm-3 input-group-sm">
+									<input type="text" class="form-control" id="fenqubds" placeholder="">
+								</div>
+							</div>
+							<div class="form-group" id="dongtaifenduDiv" style="display: none;">
+								<label  class="col-sm-2 control-label">选择分区字段</label>
+								<div class="col-sm-3 input-group-sm">
+									<input type="text" class="form-control" id="fenquziduan">
+									<span class="glyphicon glyphicon-search quickSearchIcon"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label  class="col-sm-2 control-label" style="padding-top:0;">where查询条件</label>
+								<div class="col-sm-5 input-group-sm">
+									<textarea class="miaoshu" id="where"></textarea>
+								</div>
+								<div class="col-sm-5"></div>
+							</div>
+							<div class="form-group">
+								<label  class="col-sm-2 control-label" style="padding-top:0;">描述</label>
+								<div class="col-sm-5 input-group-sm">
+									<textarea class="miaoshu" id="desc"></textarea>
+								</div>
+								<div class="col-sm-5"></div>
+							</div>
+						</div><!-- /.box-body -->
+						<div class="box-footer">
+							<a id="saveInfo" class="btn btn-info pull-right">保存</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+<!-- 选择用户弹窗 -->
+<div class="modal fade" id="userModal" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+				<h4 class="modal-title">请选择用户</h4>
+			</div>
+			<div class="modal-body">
+				<div class="box box-solid">
+					<div class="box-header with-border">
+						<div class="form-group">
+							<label  class="col-sm-2 control-label">快速查询</label>
+							<div class="col-sm-6 input-group-sm">
+								<input type="text" class="form-control" id="quickSearchName" placeholder="">
+							</div>
+							<div class="col-sm-4"></div>
+						</div>
+
+					</div>
+					<div class="box-body no-padding selectUsers">
+						<!--<a class="btn btn-app" data-id="1" data-loginName="guoyan">-->
+							<!--<span class="badge bg-yellow"><i class="fa fa-fw fa-times"></i></span>-->
+							<!--Notifications-->
+						<!--</a>-->
+					</div>
+					<div class="box-body no-padding" style="display: block;">
+						<ul class="nav nav-pills nav-stacked myuserUl">
+							<!--<li><a href="javascript:void(0);">郭岩  guoya@elong.com</a></li>-->
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary" id="addFuzeren">确定</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div>
+<!-- 添加数据源弹窗 -->
+<div class="modal fade" id="addDBModal" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+				<h4 class="modal-title">填写配置信息</h4>
+			</div>
+			<div class="modal-body">
+				<form id="DBConfForm">
+					<div class="form-group">
+						<label for="DBName">DBName</label>
+						<input type="text" class="form-control" id="DBName" placeholder="">
+						<label for="URL">URL</label>
+						<input type="text" class="form-control" id="URL" placeholder="0.0.0.0">
+						<label for="port">Port</label>
+						<input type="text" class="form-control" id="port" placeholder="3306">
+						<label for="account">User</label>
+						<input type="text" class="form-control" id="account" placeholder="">
+						<label for="passwd">Pass Word</label>
+						<input type="password" class="form-control" id="passwd" placeholder="">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default pull-left closeModal" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-warning" id="tryConnectBtn">未测试</button>
+				<button type="button" class="btn btn-primary" id="addDB">确定</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div>
+</body>
+<script src="/static/js/channel/DBtoHiveAdd.js"></script>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<body class="sidebar-mini skin-purple wysihtml5-supported">
+<div>
+	<section class="content">
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a>数据通道</a></li>
+				<li><a href="exportDBList.html">导出</a></li>
+				<li class="active">DB导出</li>
+			</ol>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="box">
+					<form class="form-horizontal">
+						<div class="box-body">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">任务名</label>
+								<div class="col-sm-3 input-group-sm">
+									<input type="text" class="form-control" id="taskName" placeholder="">
+								</div>
+								<div class="col-sm-7"></div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">负责人</label>
+								<div class="col-sm-3 input-group-sm">
+									<input type="text" class="form-control" id="userNames" readonly >
+								</div>
+								<div class="col-sm-1" style="line-height:30px;padding-left:0;">
+									<i class="fa fa-fw fa-plus" id="addUserBut"></i>
+								</div>
+								<div class="col-sm-6"></div>
+							</div>
+							<div class="form-group">
+								<label  class="col-sm-2 control-label">Hive库</label>
+								<div class="col-sm-3 input-group-sm">
+									<input type="text" class="form-control" id="hiveKu"  placeholder="">
+									<span class="glyphicon glyphicon-search quickSearchIcon"></span>
+								</div>
+								<div class="col-sm-7"></div>
+							</div>
+							<div class="form-group">
+								<label  class="col-sm-2 control-label">Hive表</label>
+								<div class="col-sm-3 input-group-sm">
+									<input type="text" class="form-control" id="hivebiao" placeholder="">
+									<span class="glyphicon glyphicon-search quickSearchIcon"></span>
+								</div>
+								<div class="col-sm-7"></div>
+							</div>
+							<div class="form-group">
+								<label  class="col-sm-2 control-label">DB简称</label>
+								<div class="col-sm-3 input-group-sm">
+									<input type="text" class="form-control" id="mubiaoku"  placeholder="">
+									<span class="glyphicon glyphicon-search quickSearchIcon"></span>
+								</div>
+								<div class="col-sm-7"></div>
+							</div>
+							<div class="form-group">
+								<label  class="col-sm-2 control-label">目标表</label>
+								<div class="col-sm-3 input-group-sm">
+									<input type="text" class="form-control" id="mubiaobiao" placeholder="">
+									<span class="glyphicon glyphicon-search quickSearchIcon"></span>
+								</div>
+								<div class="col-sm-7"></div>
+							</div>
+							<div class="form-group">
+								<label  class="col-sm-2 control-label"></label>
+								<div class="col-sm-3 input-group-sm">
+									<div class="box mybox operBox">
+										<div class="box-header">
+											<h3 class="box-title">目标表</h3>
+										</div><!-- /.box-header -->
+										<div class="box-body no-padding dingzhitable">
+											<table class="table table-condensed">
+												<thead>
+												<tr>
+													<th>字段名</th>
+													<th>字段类型</th>
+												</tr>
+												</thead>
+												<tbody id="yuanElm">
+												</tbody></table>
+										</div><!-- /.box-body -->
+									</div>
+									<div>
+										<a class="btn  btn-default myButton" id="yuanElmAll">全选</a>
+										<a class="btn  btn-default myButton" id="toRight">右移</a>
+									</div>
+								</div>
+								<div class="col-sm-3 input-group-sm">
+									<div class="box mybox operBox">
+										<div class="box-header">
+											<h3 class="box-title">已选字段</h3>
+										</div><!-- /.box-header -->
+										<div class="box-body no-padding dingzhitable">
+											<table class="table table-condensed">
+												<thead>
+												<tr>
+													<th>字段名</th>
+													<th>字段类型</th>
+												</tr>
+												</thead>
+												<tbody id="selectedElm">
+												</tbody></table>
+										</div><!-- /.box-body -->
+									</div>
+									<div>
+										<a class="btn  btn-default myButton" id="selectedElmAll">全选</a>
+										<a class="btn  btn-default myButton" id="selectedElmDown">下移</a>
+										<a class="btn  btn-default myButton" id="selectedElmUp">上移</a>
+										<a class="btn  btn-default myButton" id="toLeft">左移</a>
+									</div>
+								</div>
+								<div class="col-sm-3 input-group-sm">
+									<div class="box mybox oprshowBox">
+										<div class="box-header">
+											<h3 class="box-title">Hive表</h3>
+										</div><!-- /.box-header -->
+										<div class="box-body no-padding dingzhitable">
+											<table class="table table-condensed">
+												<thead>
+												<tr>
+													<th>字段名</th>
+													<th>字段类型</th>
+												</tr>
+												</thead>
+												<tbody id="hiveElm">
+
+												</tbody></table>
+										</div><!-- /.box-body -->
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label  class="col-sm-2 control-label" style="padding-top:0;">Hive表分区表达式</label>
+								<div class="col-sm-5 input-group-sm">
+									<textarea class="miaoshu" id="hivefentubiaodashi" placeholder="(只能填写partition_dt=${},不能默认是全部导出)"></textarea>
+								</div>
+								<div class="col-sm-5"></div>
+							</div>
+							<div class="form-group">
+								<label  class="col-sm-2 control-label" style="padding-top:0;">delete目标表的where条件</label>
+								<div class="col-sm-5 input-group-sm">
+									<textarea class="miaoshu" id="where" placeholder="(支持时间表达式,不填则不删表数据)"></textarea>
+								</div>
+								<div class="col-sm-5"></div>
+							</div>
+							<div class="form-group">
+								<label  class="col-sm-2 control-label" style="padding-top:0;">描述</label>
+								<div class="col-sm-5 input-group-sm">
+									<textarea class="miaoshu" id="desc"></textarea>
+								</div>
+								<div class="col-sm-5"></div>
+							</div>
+						</div><!-- /.box-body -->
+						<div class="box-footer">
+							<a id="saveInfo" class="btn btn-info pull-right">保存</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+<div class="modal" id="userModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<h4 class="modal-title">请选择用户</h4>
+			</div>
+			<div class="modal-body">
+				<div class="box box-solid">
+					<div class="box-header with-border">
+						<div class="form-group">
+							<label  class="col-sm-2 control-label">快速查询</label>
+							<div class="col-sm-6 input-group-sm">
+								<input type="text" class="form-control" id="quickSearchName" placeholder="">
+							</div>
+							<div class="col-sm-4"></div>
+						</div>
+
+					</div>
+					<div class="box-body no-padding selectUsers">
+						<!--<a class="btn btn-app" data-id="1" data-loginName="guoyan">-->
+						<!--<span class="badge bg-yellow"><i class="fa fa-fw fa-times"></i></span>-->
+						<!--Notifications-->
+						<!--</a>-->
+					</div>
+					<div class="box-body no-padding" style="display: block;">
+						<ul class="nav nav-pills nav-stacked myuserUl">
+							<!--<li><a href="javascript:void(0);">郭岩  guoya@elong.com</a></li>-->
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary" id="addFuzeren">确定</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div>
+
+</body>
+<script src="/static/js/channel/exportDB.js"></script>
+</html>
