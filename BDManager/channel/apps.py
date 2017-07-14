@@ -84,10 +84,9 @@ def GetHiveDB(request):
 def GetHiveTable(request):
   DBName = request.GET["DBName"]
   conf = request.session['hiveConf']
-  conf['DBName'] = DBName
   res = dict()
   try:
-    conn=dbapi.connect(host=conf['URL'], port=conf['port'], database=conf['DBName'], auth_mechanism=conf['auth_mechanism'])
+    conn=dbapi.connect(host=conf['URL'], port=conf['port'], database=DBName, auth_mechanism=conf['auth_mechanism'])
     cur=conn.cursor()
     cur.execute('show tables')
     tables = cur.fetchall()
@@ -95,8 +94,7 @@ def GetHiveTable(request):
     conn.close()
     res['success'] = True
     res['hiveTables'] = tables
-    del request.session['hiveConf']
-    request.session['hiveConf'] = conf
+    request.session['hiveDB'] = DBName
     return JsonResponse(res)
   except MySQLdb.Error,e:
     err = "Hive Error %d: %s" % (e.args[0], e.args[1])
@@ -107,9 +105,10 @@ def GetHiveTable(request):
 def GetHiveTableDesc(request):
   tableName = request.GET["tableName"]
   conf = request.session['hiveConf']
+  DBName = request.session['hiveDB']
   res = dict()
   try:
-    conn=dbapi.connect(host=conf['URL'], port=conf['port'], database=conf['DBName'], auth_mechanism=conf['auth_mechanism'])
+    conn=dbapi.connect(host=conf['URL'], port=conf['port'], database=DBName, auth_mechanism=conf['auth_mechanism'])
     cur=conn.cursor()
     cur.execute('desc '+tableName)
     tableDesc = cur.fetchall()
