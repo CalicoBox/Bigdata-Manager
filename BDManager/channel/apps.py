@@ -64,7 +64,7 @@ def GetHiveTableDescription(request):
   print("~1")
   tableName = request.GET["tableName"]
   print("~2")
-  DBName = request.Get["DBName"]
+  DBName = request.GET["DBName"]
   print("~3")
   print(tableName+"~~~~"+DBName)
   conf = request.session['hiveConf']
@@ -124,33 +124,6 @@ def GetHiveTable(request):
     res['success'] = True
     res['hiveTables'] = tables
     request.session['hiveDB'] = DBName
-    return JsonResponse(res)
-  except MySQLdb.Error,e:
-    err = "Hive Error %d: %s" % (e.args[0], e.args[1])
-    res['success'] = False
-    res['err'] = err
-    return JsonResponse(res)
-
-def GetHiveTableDesc_1(request):
-  print("~1")
-  tableName = request.GET["tableName"]
-  print("~2")
-  DBName = request.Get["DBName"]
-  print("~3")
-  print(tableName+"~~~~"+DBName)
-  conf = request.session['hiveConf']
-  res = dict()
-  try:
-    conn=dbapi.connect(host=conf['URL'], port=conf['port'], database=DBName, auth_mechanism=conf['auth_mechanism'])
-    cur=conn.cursor()
-    cur.execute('desc '+tableName)
-    tableDesc = cur.fetchall()
-    print("~~~~"+tableDesc)
-    cur.close()
-    conn.close()
-    res['success'] = True
-    res['hiveTableDesc'] = tableDesc
-    request.session['hiveTable'] = tableName
     return JsonResponse(res)
   except MySQLdb.Error,e:
     err = "Hive Error %d: %s" % (e.args[0], e.args[1])
