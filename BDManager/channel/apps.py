@@ -82,6 +82,7 @@ def GetHiveDB(request):
     return JsonResponse(res)
 
 def GetHiveTable(request):
+  print("~0")
   DBName = request.GET["DBName"]
   conf = request.session['hiveConf']
   res = dict()
