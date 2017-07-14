@@ -250,7 +250,10 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
             });
             $("#hiveTable").focusout(function () {
                 $("#hiveTableMenu").slideUp(100, function () {
-                    _this.getHiveTableDesc($(this).siblings("input").val())
+                    var info = {};
+                    info["tableName"] = $(this).siblings("input").val();
+                    info["DBName"] = $("#hiveDB").val();
+                    _this.getHiveTableDesc(info)
                 });
                 $("#hiveTableMenu").off("mousedown", "a");
             });
@@ -614,7 +617,8 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                 type: "get",
                 url: "/channel/GetHiveTableDesc",
                 data: {
-                    tableName: data,
+                    tableName: data['tableName'],
+                    DBName: data['DBName'],
                 },
                 success: function (result) {
                     showloading(false);
