@@ -152,10 +152,6 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                         + '</a>');
                 }
             });
-            $("#hiveDBMenu").on("click", "li",function () {
-                alert("choice hiveDB");
-                // $(this).parents("ul").siblings("input").val($(this).val());
-            });
             //////////////////////
             //模糊框关闭：清空
             //////////////////////
@@ -236,6 +232,11 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                 $("#hiveDBMenu").slideUp(100, function () {
                     alert($(this).siblings("#hiveDB").val());
                 });
+            });
+            $("#hiveDBMenu").off("click");
+            $("#hiveDBMenu").on("click", "li",function () {
+                alert("choice hiveDB");
+                // $(this).parents("ul").siblings("input").val($(this).val());
             });
 
             $("#saveInfo").click(function () {
