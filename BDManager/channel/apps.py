@@ -112,6 +112,7 @@ def GetHiveTableDesc(request):
     cur=conn.cursor()
     cur.execute('desc '+tableName)
     tableDesc = cur.fetchall()
+    print(tableDesc)
     cur.close()
     conn.close()
     res['success'] = True
