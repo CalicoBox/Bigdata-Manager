@@ -623,7 +623,7 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                 success: function (result) {
                     showloading(false);
                     if (result && result.success) {
-                        alert(result);
+                        alert(result.hiveTables);
                         _this.setHiveTableElm(result.hiveTableDesc);
                     } else {
                         $.showModal({content: "查询失败"+result.err});
