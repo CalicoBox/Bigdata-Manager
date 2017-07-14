@@ -17,6 +17,7 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
 
         init: function () {
             this.initEvent();
+            this.getHiveDB();
         },
 
         initEvent: function () {
@@ -212,6 +213,13 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                 }
             });
             ///////////////////
+            //查找hive数据库
+            ////////////////////
+            $("#hiveDB").focusout(function () {
+                $("#hiveDBMenu").hide();
+            })
+
+            ///////////////////
             //选取字段
             ///////////////////
             $("")
@@ -233,7 +241,7 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                     {name: "taskName", label: "任务名"},
                     {name: "userNames", label: "负责人"},
                     {name: "dbjiancheng", label: "DB简称"},
-                    {name: "hiveKu", label: "Hive库"},
+                    {name: "hiveDB", label: "Hive库"},
                     {name: "hivebiao", label: "Hive表"},
                     {name: "desc", label: "描述"}
                 ]
@@ -274,8 +282,8 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                     }
                 }
                 sqoop.sqoops = childSqoop;
-                sqoop.hiveDbName = $("#hiveKu").val();
-                sqoop.hiveDbId = $("#hiveKu").attr("data-value");
+                sqoop.hiveDbName = $("#hiveDB").val();
+                sqoop.hiveDbId = $("#hiveDB").attr("data-value");
                 sqoop.hiveTable = $("#hivebiao").val();
                 sqoop.hiveTabId = $("#hivebiao").attr("data-value");
                 sqoop.fieldsTerminatedBy = _this.hiveTerminated;
@@ -354,7 +362,7 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                             debugger;
                             location.href = "importDBList.html";
                         } else {
-                            $.showModal({content: "保存失败:"+result.message});
+                            $.showModal({content: "保存失败:"+result.err});
                         }
                     },
                     error: function (a, b, c) {
@@ -365,30 +373,31 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
             }
         },
 
-        getHive: function () {
+        getHiveDB: function (DBName) {
             var _this = this;
             showloading(true);
             $.ajax({
                 type: "get",
-                url: "/sentosa/metadata/db/hives",
-                data: {},
+                url: "/channel/GetHiveDB",
+                data: {
+                },
                 success: function (result) {
                     showloading(false);
                     if (result && result.success) {
-                        var dat = result.pairs.innerHiveDBs;
-                        dat = dat.concat(result.pairs.marketHiveDBs);
-                        $("#hiveKu").quickSearch({
-                            data: dat,
-                            text: "name",
-                            value: "id",
-                            width: "400px"
-                        });
-                        $("#hiveKu").changeValue(function () {
-                            var id = $(this).attr("data-value");
-                            _this.getHivebiao(id);
-                        });
+                        hiveDBs_str = "";
+
+                        for (elem in hiveDBs) {
+                            hiveDBs_str += hiveDBs[elem] + " ";
+                        }
+                        $("#hiveDB").bind('keyup', {hiveDBs: hiveDBs_str}, function (e) {
+                            alert(e.data.hiveDBs);
+                            var e = e || window.event;
+                            var value = $(this).val();
+                            var reg = new RegExp(value+"[a-zA-Z0-9_-]*","g");
+                            setHiveDBCandidate(e.data.hiveDBs.match(reg));
+                        })
                     } else {
-                        $.showModal({content: "查询失败:"+result.message});
+                        $.showModal({content: "查询失败:"+result.err});
                     }
                 },
                 error: function (a, b, c) {
@@ -397,7 +406,13 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                 }
             });
         },
-
+        setHiveDBCandidate: function (data) {
+            $("#hiveDBMenu").empty();
+            for (elem in data) {
+                $("#hiveDBMenu").append('<li><a href="#">'+data[elem]+'</a></li>');
+            }
+            $("#hiveDBMenu").dropdown('toggle');
+        },
         getHivebiao: function (id) {
             var _this = this;
             $("#hivebiao").val("");
@@ -658,7 +673,7 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                     if (result.success) {
                         $("#tryConnectBtn").attr({class:"btn btn-success", value:"success"});
                         $("#tryConnectBtn").text("通过");
-                        _this.setDBDig(result.tables);
+                        _this.setTables(result.tables);
                     } else {
                         $("#addDBModal .modal-body").append('<div class="alert alert-danger" role="alert" >'+result.err+'</div>');
                         _this.quickTimeOut = setTimeout(function () {
@@ -674,12 +689,14 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                 }
             });
         },
-        setDBDig: function (data) {
+        setTables: function (data) {
             $("#zifenpian").empty();
+            var temp_str = "";
             for (var elem in data) {
-                var table = data[elem][0];
+                var table = data[elem];
                 $("#zifenpian").append('<tr><td><div class="input-group"><span class="input-group-addon"><input class="choiceTableBtn" type="radio" name="optionsRadios" value="'+table+'"></span><input type="text" class="form-control text-center" data-kuId="1" placeholder="" readonly="readonly" value="'+table+'"><span class="input-group-addon"><span class="glyphicon glyphicon-align-justify seeTableDescBtn"></span></span></div></td></tr>');
             }
+            alert(temp_str);
         },
         getTable: function (table) {
             var _this = this;
@@ -695,7 +712,7 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                     if (result && result.success) {
                         _this.setTableElm(result.tableDesc);
                     } else {
-                        $.showModal({content: "查询失败"});
+                        $.showModal({content: "查询失败"+result.err});
                     }
                 },
                 error: function (a, b, c) {

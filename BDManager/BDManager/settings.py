@@ -86,8 +86,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'bdmanager',
         'USER': 'root',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
+        'PASSWORD': 'root',
+        'HOST': '10.3.55.204',
         'PORT': '3306'
     },
 }
@@ -96,6 +96,8 @@ DATABASE_ROUTERS = ['database_router.DatabaseAppsRouter']
 
 DATABASE_APPS_MAPPING = {
     'login': 'default',
+    'main': 'default',
+    'channel': 'default',
 }
 
 # Password validation
