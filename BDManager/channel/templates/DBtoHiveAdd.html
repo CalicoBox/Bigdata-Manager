@@ -5,9 +5,9 @@
 	<section class="content">
 		<div class="row">
 			<ol class="breadcrumb">
-				<li><a>Êý¾ÝÍ¨µÀ</a></li>
-				<li><a href="channelList.html">µ¼Èë</a></li>
-				<li class="active">DBµ¼ÈëHive</li>
+				<li><a>æ•°æ®é€šé“</a></li>
+				<li><a href="channelList.html">å¯¼å…¥</a></li>
+				<li class="active">DBå¯¼å…¥Hive</li>
 			</ol>
 		</div>
 		<div class="row">
@@ -20,7 +20,7 @@
 									<div class="box mybox fenpianbox" style="margin-bottom: 15px; height: 15em;">
 										<div class="box-body" style="overflow: auto; height: 14em; margin-bottom: 13px;">
 											<table class="table">
-												<!-- ×Ó·ÖÆ¬ -->
+												<!-- å­åˆ†ç‰‡ -->
 												<tbody id="zifenpian">
 												<tr>
 													<td>
@@ -46,27 +46,27 @@
 								<!-- <div class="col-sm-4"></div> -->
 							</div>
 							<div class="form-group col-sm-6">
-								<label class="col-sm-4 control-label">ÈÎÎñÃû</label>
+								<label class="col-sm-4 control-label">ä»»åŠ¡å</label>
 								<div class="col-sm-8 input-group-sm">
 									<input type="text" class="form-control" id="taskName" placeholder="">
 								</div>
 							</div>
 							<div class="form-group col-sm-6">
-								<label class="col-sm-4 control-label">¸ºÔðÈË</label>
+								<label class="col-sm-4 control-label">è´Ÿè´£äºº</label>
 								<div class="col-sm-8 input-group-sm">
 									<input type="text" class="form-control" id="userNames" readonly >
 									<span class="glyphicon glyphicon-plus quickSearchIcon" id="addUserBut"></span>
 								</div>
 							</div>
 							<div class="form-group col-sm-6">
-								<label class="col-sm-4 control-label">Êý¾ÝÔ´</label>
+								<label class="col-sm-4 control-label">æ•°æ®æº</label>
 								<div class="col-sm-8 input-group-sm dropdown">
 									<input type="text" class="form-control" id="dbjiancheng" readonly>
 									<span class="glyphicon glyphicon-plus quickSearchIcon" id="confDBInfoBtn"></span>
 								</div>
 							</div>
 							<div class="form-group col-sm-6">
-								<label  class="col-sm-4 control-label">Hive¿â</label>
+								<label  class="col-sm-4 control-label">Hiveåº“</label>
 								<div class="col-sm-8 input-group-sm">
 									<input type="text" class="form-control" id="hiveDB"  placeholder="">
 									<span class="glyphicon glyphicon-search quickSearchIcon"></span>
@@ -76,7 +76,7 @@
 								</div>
 							</div>
 							<div class="form-group col-sm-6">
-								<label  class="col-sm-4 control-label">Hive±í</label>
+								<label  class="col-sm-4 control-label">Hiveè¡¨</label>
 								<div class="col-sm-8 input-group-sm">
 									<input type="text" class="form-control" id="hiveTable" placeholder="">
 									<span class="glyphicon glyphicon-search quickSearchIcon"></span>
@@ -90,14 +90,14 @@
 								<div class="col-sm-3 input-group-sm">
 									<div class="box mybox fieldBox operBox">
 										<div class="box-header no-padding">
-											<h3 class="box-title">Ô´±í</h3>
+											<h3 class="box-title">æºè¡¨</h3>
 										</div><!-- /.box-header -->
 										<div class="box-body no-padding dingzhitable">
 											<table class="table table-condensed">
 												<thead>
 													<tr>
-														<th>×Ö¶ÎÃû</th>
-														<th>×Ö¶ÎÀàÐÍ</th>
+														<th>å­—æ®µå</th>
+														<th>å­—æ®µç±»åž‹</th>
 													</tr>
 												</thead>
 												<tbody id="yuanElm">
@@ -105,21 +105,21 @@
 										</div><!-- /.box-body -->
 									</div>
 									<div>
-										<a class="btn  btn-default myButton" id="yuanElmAll">È«Ñ¡</a>
-										<a class="btn  btn-default myButton" id="toRight">ÓÒÒÆ</a>
+										<a class="btn  btn-default myButton" id="yuanElmAll">å…¨é€‰</a>
+										<a class="btn  btn-default myButton" id="toRight">å³ç§»</a>
 									</div>
 								</div>
 								<div class="col-sm-3 input-group-sm">
 									<div class="box mybox fieldBox operBox">
 										<div class="box-header no-padding">
-											<h3 class="box-title">ÒÑÑ¡×Ö¶Î</h3>
+											<h3 class="box-title">å·²é€‰å­—æ®µ</h3>
 										</div><!-- /.box-header -->
 										<div class="box-body no-padding dingzhitable">
 											<table class="table table-condensed">
 												<thead>
 												<tr>
-													<th>×Ö¶ÎÃû</th>
-													<th>×Ö¶ÎÀàÐÍ</th>
+													<th>å­—æ®µå</th>
+													<th>å­—æ®µç±»åž‹</th>
 												</tr>
 												</thead>
 												<tbody id="selectedElm">
@@ -127,23 +127,23 @@
 										</div><!-- /.box-body -->
 									</div>	
 									<div>
-										<a class="btn  btn-default myButton" id="selectedElmAll">È«Ñ¡</a>
-										<a class="btn  btn-default myButton" id="selectedElmDown">ÏÂÒÆ</a>
-										<a class="btn  btn-default myButton" id="selectedElmUp">ÉÏÒÆ</a>
-										<a class="btn  btn-default myButton" id="toLeft">×óÒÆ</a>
+										<a class="btn  btn-default myButton" id="selectedElmAll">å…¨é€‰</a>
+										<a class="btn  btn-default myButton" id="selectedElmDown">ä¸‹ç§»</a>
+										<a class="btn  btn-default myButton" id="selectedElmUp">ä¸Šç§»</a>
+										<a class="btn  btn-default myButton" id="toLeft">å·¦ç§»</a>
 									</div>
 								</div>
 								<div class="col-sm-3 input-group-sm">
 									<div class="box mybox fieldBox oprshowBox">
 										<div class="box-header no-padding">
-											<h3 class="box-title">Hive±í</h3>
+											<h3 class="box-title">Hiveè¡¨</h3>
 										</div><!-- /.box-header -->
 										<div class="box-body no-padding dingzhitable">
 											<table class="table table-condensed">
 												<thead>
 												<tr>
-													<th>×Ö¶ÎÃû</th>
-													<th>×Ö¶ÎÀàÐÍ</th>
+													<th>å­—æ®µå</th>
+													<th>å­—æ®µç±»åž‹</th>
 												</tr>
 												</thead>
 												<tbody id="hiveElm">
@@ -154,27 +154,27 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label  class="col-sm-2 control-label">Êý¾ÝÇÐ·Ö×Ö¶Î</label>
+								<label  class="col-sm-2 control-label">æ•°æ®åˆ‡åˆ†å­—æ®µ</label>
 								<div class="col-sm-3 input-group-sm">
 									<input type="text" class="form-control" id="qiefenziduan">
 									<span class="glyphicon glyphicon-search quickSearchIcon"></span>
 								</div>
 							</div>
 							<div class="form-group">
-								<label  class="col-sm-2 control-label">Êý¾ÝÁ¿</label>
+								<label  class="col-sm-2 control-label">æ•°æ®é‡</label>
 								<div class="col-sm-3 input-group-sm">
 									<select class="myselect100" id="shujuliang">
-										<option value="2">50ÍòÒÔÏÂ</option>
-										<option value="4">50-100Íò</option>
-										<option value="8">100-500Íò</option>
-										<option value="16">500-1000Íò</option>
-										<option value="32">1000-3000Íò</option>
+										<option value="2">50ä¸‡ä»¥ä¸‹</option>
+										<option value="4">50-100ä¸‡</option>
+										<option value="8">100-500ä¸‡</option>
+										<option value="16">500-1000ä¸‡</option>
+										<option value="32">1000-3000ä¸‡</option>
 									</select>
 								</div>
-								<div class="col-sm-1">
+								<!-- <div class="col-sm-1">
 									<div class="radio">
 										<label>
-											<input type="checkbox" name="gaoji" value="1" id="gaoji">¸ß¼¶
+											<input type="checkbox" name="gaoji" value="1" id="gaoji">é«˜çº§
 										</label>
 									</div>
 								</div>
@@ -183,44 +183,44 @@
 								</div>
 							</div>
 							<div class="form-group fenquOperate">
-								<label class="col-sm-2 control-label">·ÖÇø±í´ïÊ½</label>
+								<label class="col-sm-2 control-label">åˆ†åŒºè¡¨è¾¾å¼</label>
 								<div class="col-sm-2">
 									<div class="radio">
 										<label>
-											<input type="radio" class="fenquType" name="fenquType" value="0" checked>·ÖÇø±í´ïÊ½
+											<input type="radio" class="fenquType" name="fenquType" value="0" checked>åˆ†åŒºè¡¨è¾¾å¼
 										</label>
 									</div>
 								</div>
 								<div class="col-sm-2">
 									<div class="radio">
 										<label>
-											<input type="radio" class="fenquType" name="fenquType" value="1">¶¯Ì¬·ÖÇø
+											<input type="radio" class="fenquType" name="fenquType" value="1">åŠ¨æ€åˆ†åŒº
 										</label>
 									</div>
 								</div>
 							</div>
 							<div class="form-group fenquOperate" id="fenqubiaodashi">
-								<label  class="col-sm-2 control-label">·ÖÇø±í´ïÊ½</label>
+								<label  class="col-sm-2 control-label">åˆ†åŒºè¡¨è¾¾å¼</label>
 								<div class="col-sm-3 input-group-sm">
 									<input type="text" class="form-control" id="fenqubds" placeholder="">
 								</div>
-							</div>
+							</div> -->
 							<div class="form-group" id="dongtaifenduDiv" style="display: none;">
-								<label  class="col-sm-2 control-label">Ñ¡Ôñ·ÖÇø×Ö¶Î</label>
+								<label  class="col-sm-2 control-label">é€‰æ‹©åˆ†åŒºå­—æ®µ</label>
 								<div class="col-sm-3 input-group-sm">
 									<input type="text" class="form-control" id="fenquziduan">
 									<span class="glyphicon glyphicon-search quickSearchIcon"></span>
 								</div>
 							</div>
 							<div class="form-group">
-								<label  class="col-sm-2 control-label" style="padding-top:0;">where²éÑ¯Ìõ¼þ</label>
+								<label  class="col-sm-2 control-label" style="padding-top:0;">whereæŸ¥è¯¢æ¡ä»¶</label>
 								<div class="col-sm-5 input-group-sm">
 									<textarea class="miaoshu" id="where"></textarea>
 								</div>
 								<div class="col-sm-5"></div>
 							</div>
 							<div class="form-group">
-								<label  class="col-sm-2 control-label" style="padding-top:0;">ÃèÊö</label>
+								<label  class="col-sm-2 control-label" style="padding-top:0;">æè¿°</label>
 								<div class="col-sm-5 input-group-sm">
 									<textarea class="miaoshu" id="desc"></textarea>
 								</div>
@@ -228,7 +228,7 @@
 							</div>
 						</div><!-- /.box-body -->
 						<div class="box-footer">
-							<a id="saveInfo" class="btn btn-info pull-right">±£´æ</a>
+							<a id="saveInfo" class="btn btn-info pull-right">ä¿å­˜</a>
 						</div>
 					</form>
 				</div>
@@ -236,19 +236,19 @@
 		</div>
 	</section>
 </div>
-<!-- Ñ¡ÔñÓÃ»§µ¯´° -->
+<!-- é€‰æ‹©ç”¨æˆ·å¼¹çª— -->
 <div class="modal fade" id="userModal" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"><span>¡Á</span></button>
-				<h4 class="modal-title">ÇëÑ¡ÔñÓÃ»§</h4>
+				<button type="button" class="close" data-dismiss="modal"><span>Ã—</span></button>
+				<h4 class="modal-title">è¯·é€‰æ‹©ç”¨æˆ·</h4>
 			</div>
 			<div class="modal-body">
 				<div class="box box-solid">
 					<div class="box-header with-border">
 						<div class="form-group">
-							<label  class="col-sm-2 control-label">¿ìËÙ²éÑ¯</label>
+							<label  class="col-sm-2 control-label">å¿«é€ŸæŸ¥è¯¢</label>
 							<div class="col-sm-6 input-group-sm">
 								<input type="text" class="form-control" id="quickSearchName" placeholder="">
 							</div>
@@ -264,25 +264,25 @@
 					</div>
 					<div class="box-body no-padding" style="display: block;">
 						<ul class="nav nav-pills nav-stacked myuserUl">
-							<!--<li><a href="javascript:void(0);">¹ùÑÒ  guoya@elong.com</a></li>-->
+							<!--<li><a href="javascript:void(0);">éƒ­å²©  guoya@elong.com</a></li>-->
 						</ul>
 					</div>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">¹Ø±Õ</button>
-				<button type="button" class="btn btn-primary" id="addFuzeren">È·¶¨</button>
+				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">å…³é—­</button>
+				<button type="button" class="btn btn-primary" id="addFuzeren">ç¡®å®š</button>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div>
-<!-- Ìí¼ÓÊý¾ÝÔ´µ¯´° -->
+<!-- æ·»åŠ æ•°æ®æºå¼¹çª— -->
 <div class="modal fade" id="addDBModal" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"><span>¡Á</span></button>
-				<h4 class="modal-title">ÌîÐ´ÅäÖÃÐÅÏ¢</h4>
+				<button type="button" class="close" data-dismiss="modal"><span>Ã—</span></button>
+				<h4 class="modal-title">å¡«å†™é…ç½®ä¿¡æ¯</h4>
 			</div>
 			<div class="modal-body">
 				<form id="DBConfForm">
@@ -301,9 +301,9 @@
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default pull-left closeModal" data-dismiss="modal">¹Ø±Õ</button>
-				<button type="button" class="btn btn-warning" id="tryConnectBtn">Î´²âÊÔ</button>
-				<button type="button" class="btn btn-primary" id="addDB">È·¶¨</button>
+				<button type="button" class="btn btn-default pull-left closeModal" data-dismiss="modal">å…³é—­</button>
+				<button type="button" class="btn btn-warning" id="tryConnectBtn">æœªæµ‹è¯•</button>
+				<button type="button" class="btn btn-primary" id="addDB">ç¡®å®š</button>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
