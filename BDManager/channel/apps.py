@@ -60,7 +60,7 @@ def GetTableDesc(request):
     res['err'] = err
     return JsonResponse(res)
 
-def GetHiveTableDesc(request):
+def GetHiveTableDescription(request):
   print("~1")
   tableName = request.GET["tableName"]
   print("~2")

@@ -49,6 +49,6 @@ urlpatterns = [
     url(r'^channel/GetDBConnect', GetDBConnect, name="GetDBConnect"),
     url(r'^channel/GetTableDesc', GetTableDesc, name="GetTableDesc"),
     url(r'^channel/GetHiveDB', GetHiveDB, name="GetHiveDB"),
+    url(r'^channel/GetHiveTableDesc', GetHiveTableDescription, name="GetHiveTableDesc"),
     url(r'^channel/GetHiveTable', GetHiveTable, name="GetHiveTable"),
-    url(r'^channel/GetHiveTableDesc', GetHiveTableDesc, name="GetHiveTableDesc"),
 ]
