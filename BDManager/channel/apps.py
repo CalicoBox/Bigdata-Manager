@@ -103,8 +103,11 @@ def GetHiveTable(request):
     return JsonResponse(res)
 
 def GetHiveTableDesc(request):
+  print("~1")
   tableName = request.GET["tableName"]
+  print("~2")
   DBName = request.Get["DBName"]
+  print("~3")
   print(tableName+"~~~~"+DBName)
   conf = request.session['hiveConf']
   res = dict()

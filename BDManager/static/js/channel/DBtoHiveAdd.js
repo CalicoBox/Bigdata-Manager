@@ -617,8 +617,8 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                 type: "get",
                 url: "/channel/GetHiveTableDesc",
                 data: {
-                    tableName: data['tableName'],
                     DBName: data['DBName'],
+                    tableName: data['tableName'],
                 },
                 success: function (result) {
                     showloading(false);
