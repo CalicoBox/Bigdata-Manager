@@ -86,7 +86,9 @@ def GetHiveTableDesc(request):
     res['success'] = False
     res['err'] = err
     return JsonResponse(res)
+
 def GetHiveDB(request):
+  print("~-1")
   conf = {'URL':'10.3.181.235', 'port':10000, 'auth_mechanism':'PLAIN'}
   res = dict()
   try:
