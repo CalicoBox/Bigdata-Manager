@@ -153,7 +153,7 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                 }
             });
             $("#hiveDBMenu").delegate("li a", "click", function () {
-                alert($(this).val());
+                alert("choice hiveDB");
                 // $(this).parents("ul").siblings("input").val($(this).val());
             });
             //////////////////////
@@ -166,7 +166,8 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
             //搜索提示框关闭：选定
             //////////////////////
             $("#hiveDBMenu").on('hidden.bs.dropdown', function () {
-                alert($(this).siblings("#hiveDB").val());
+                alert("dropdown hide");
+                // alert($(this).siblings("#hiveDB").val());
             })
             //////////////////////
             //添加联系人
@@ -235,9 +236,13 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
             ///////////////////
             //查找hive数据库
             ////////////////////
+            $("#hiveDB").focusin(function () {
+                $("#hiveDBMenu").dropdown();
+            });
             $("#hiveDB").focusout(function () {
                 $("#hiveDBMenu").hide();
             });
+
             $("#saveInfo").click(function () {
                 _this.saveInfo();
             });
