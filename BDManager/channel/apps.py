@@ -61,12 +61,8 @@ def GetTableDesc(request):
     return JsonResponse(res)
 
 def GetHiveTableDescription(request):
-  print("~1")
   tableName = request.GET["tableName"]
-  print("~2")
   DBName = request.GET["DBName"]
-  print("~3")
-  print(tableName+"~~~~"+DBName)
   conf = request.session['hiveConf']
   res = dict()
   try:
@@ -74,7 +70,6 @@ def GetHiveTableDescription(request):
     cur=conn.cursor()
     cur.execute('desc '+tableName)
     tableDesc = cur.fetchall()
-    print("~~~~"+tableDesc)
     cur.close()
     conn.close()
     res['success'] = True
@@ -88,7 +83,6 @@ def GetHiveTableDescription(request):
     return JsonResponse(res)
 
 def GetHiveDB(request):
-  print("~-1")
   conf = {'URL':'10.3.181.235', 'port':10000, 'auth_mechanism':'PLAIN'}
   res = dict()
   try:
@@ -110,7 +104,6 @@ def GetHiveDB(request):
     return JsonResponse(res)
 
 def GetHiveTable(request):
-  print("~0")
   DBName = request.GET["DBName"]
   conf = request.session['hiveConf']
   res = dict()
