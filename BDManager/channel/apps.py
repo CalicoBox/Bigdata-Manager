@@ -83,8 +83,8 @@ def GetHiveDB(request):
 
 def GetHiveTable(request):
   DBName = request.GET["DBName"]
-  request.session['hiveConf']['DBName'] = DBName
   conf = request.session['hiveConf']
+  conf['DBName'] = DBName
   res = dict()
   try:
     conn=dbapi.connect(host=conf['URL'], port=conf['port'], database=conf['DBName'], auth_mechanism=conf['auth_mechanism'])
@@ -95,6 +95,7 @@ def GetHiveTable(request):
     conn.close()
     res['success'] = True
     res['hiveTables'] = tables
+    del request.session['hiveConf']
     request.session['hiveConf'] = conf
     return JsonResponse(res)
   except MySQLdb.Error,e:
