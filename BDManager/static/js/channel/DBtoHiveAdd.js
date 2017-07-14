@@ -228,7 +228,7 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
             $("#hiveDB").focusin(function () {
                 $("#hiveDBMenu").slideDown(100);
                 $("#hiveDBMenu li").unbind();
-                $("#hiveDBMenu").on("click", "a", function () {
+                $("#hiveDBMenu").on("mouseenter", "a", function () {
                     alert($(this).val());
                     $(this).parents("ul").siblings("input").val($(this).val());
                 });
@@ -237,7 +237,7 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                 $("#hiveDBMenu").slideUp(100, function () {
                     alert($(this).siblings("#hiveDB").val());
                 });
-                $("#hiveDBMenu").off("click", "a");
+                $("#hiveDBMenu").off("mouseenter", "a");
             });
 
             $("#saveInfo").click(function () {
