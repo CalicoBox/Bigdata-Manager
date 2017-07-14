@@ -152,8 +152,21 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                         + '</a>');
                 }
             });
+            $("#hiveDBMenu").delegate("li a", "click", function () {
+                alert($(this).val());
+                // $(this).parents("ul").siblings("input").val($(this).val());
+            });
+            //////////////////////
+            //模糊框关闭：清空
+            //////////////////////
             $(".modal").on('hidden.bs.modal', function () {
                 $(this).find("input").val("");   
+            })
+            //////////////////////
+            //搜索提示框关闭：选定
+            //////////////////////
+            $("#hiveDBMenu").on('hidden.bs.dropdown', function () {
+                alert($(this).siblings("#hiveDB").val());
             })
             //////////////////////
             //添加联系人
@@ -213,21 +226,18 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                 }
             });
             ///////////////////
-            //查找hive数据库
-            ////////////////////
-            $("#hiveDB").focusout(function () {
-                $("#hiveDBMenu").hide();
-            })
-
+            //选取源数据字段
             ///////////////////
-            //选取字段
-            ///////////////////
-            $("")
-
             $("#zifenpian").delegate(".choiceTableBtn", "click", function () {
                 _this.getTable($(this).val());
             });
 
+            ///////////////////
+            //查找hive数据库
+            ////////////////////
+            $("#hiveDB").focusout(function () {
+                $("#hiveDBMenu").hide();
+            });
             $("#saveInfo").click(function () {
                 _this.saveInfo();
             });
@@ -385,16 +395,15 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                     showloading(false);
                     if (result && result.success) {
                         hiveDBs_str = "";
-
+                        hiveDBs = result.hiveDBs;
                         for (elem in hiveDBs) {
                             hiveDBs_str += hiveDBs[elem] + " ";
                         }
                         $("#hiveDB").bind('keyup', {hiveDBs: hiveDBs_str}, function (e) {
-                            alert(e.data.hiveDBs);
                             var e = e || window.event;
                             var value = $(this).val();
                             var reg = new RegExp(value+"[a-zA-Z0-9_-]*","g");
-                            setHiveDBCandidate(e.data.hiveDBs.match(reg));
+                            _this.setHiveDBCandidate(e.data.hiveDBs.match(reg));
                         })
                     } else {
                         $.showModal({content: "查询失败:"+result.err});
@@ -407,11 +416,11 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
             });
         },
         setHiveDBCandidate: function (data) {
+            $("#hiveDBMenu").dropdown('toggle');
             $("#hiveDBMenu").empty();
             for (elem in data) {
                 $("#hiveDBMenu").append('<li><a href="#">'+data[elem]+'</a></li>');
             }
-            $("#hiveDBMenu").dropdown('toggle');
         },
         getHivebiao: function (id) {
             var _this = this;
