@@ -105,6 +105,7 @@ def GetHiveTable(request):
 def GetHiveTableDesc(request):
   tableName = request.GET["tableName"]
   DBName = request.Get["DBName"]
+  print(tableName+"~~~~"+DBName)
   conf = request.session['hiveConf']
   res = dict()
   try:
