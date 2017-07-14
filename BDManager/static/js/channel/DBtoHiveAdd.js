@@ -227,15 +227,17 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
             ////////////////////
             $("#hiveDB").focusin(function () {
                 $("#hiveDBMenu").slideDown(100);
+                $("#hiveDBMenu li").unbind();
+                $("#hiveDBMenu").on("mouseenter", "li a", function () {
+                    alert("choice hiveDB");
+                    // $(this).parents("ul").siblings("input").val($(this).val());
+                });
             });
             $("#hiveDB").focusout(function () {
                 $("#hiveDBMenu").slideUp(100, function () {
                     alert($(this).siblings("#hiveDB").val());
                 });
-            });
-            $("#hiveDBMenu li").mouseenter(function () {
-                alert("choice hiveDB");
-                // $(this).parents("ul").siblings("input").val($(this).val());
+                $("#hiveDBMenu").off("mouseenter", "li a");
             });
 
             $("#saveInfo").click(function () {
