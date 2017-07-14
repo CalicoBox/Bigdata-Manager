@@ -233,7 +233,7 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                     alert($(this).siblings("#hiveDB").val());
                 });
             });
-            $("#hiveDBMenu").on("click", "a",function () {
+            $("#hiveDBMenu li").click(function () {
                 alert("choice hiveDB");
                 // $(this).parents("ul").siblings("input").val($(this).val());
             });
