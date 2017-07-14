@@ -152,7 +152,7 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                         + '</a>');
                 }
             });
-            $("#hiveDBMenu").delegate("li a", "click", function () {
+            $("#hiveDBMenu").on("click", "li",function () {
                 alert("choice hiveDB");
                 // $(this).parents("ul").siblings("input").val($(this).val());
             });
@@ -161,13 +161,6 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
             //////////////////////
             $(".modal").on('hidden.bs.modal', function () {
                 $(this).find("input").val("");   
-            })
-            //////////////////////
-            //搜索提示框关闭：选定
-            //////////////////////
-            $("#hiveDBMenu").on('hidden.bs.dropdown', function () {
-                alert("dropdown hide");
-                // alert($(this).siblings("#hiveDB").val());
             })
             //////////////////////
             //添加联系人
@@ -229,7 +222,7 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
             ///////////////////
             //选取源数据字段
             ///////////////////
-            $("#zifenpian").delegate(".choiceTableBtn", "click", function () {
+            $("#zifenpian").on("click", ".choiceTableBtn", function () {
                 _this.getTable($(this).val());
             });
 
@@ -237,10 +230,12 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
             //查找hive数据库
             ////////////////////
             $("#hiveDB").focusin(function () {
-                $("#hiveDBMenu").dropdown();
+                $("#hiveDBMenu").slideDown(100);
             });
             $("#hiveDB").focusout(function () {
-                $("#hiveDBMenu").hide();
+                $("#hiveDBMenu").slideUp(100, function () {
+                    alert($(this).siblings("#hiveDB").val());
+                });
             });
 
             $("#saveInfo").click(function () {
@@ -401,10 +396,10 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                     if (result && result.success) {
                         hiveDBs_str = "";
                         hiveDBs = result.hiveDBs;
-                        for (elem in hiveDBs) {
+                        for (elem in hiveDBs) { 
                             hiveDBs_str += hiveDBs[elem] + " ";
                         }
-                        $("#hiveDB").bind('keyup', {hiveDBs: hiveDBs_str}, function (e) {
+                        $("#hiveDB").on('keyup', {hiveDBs: hiveDBs_str}, function (e) {
                             var e = e || window.event;
                             var value = $(this).val();
                             var reg = new RegExp(value+"[a-zA-Z0-9_-]*","g");
@@ -421,7 +416,6 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
             });
         },
         setHiveDBCandidate: function (data) {
-            $("#hiveDBMenu").dropdown('toggle');
             $("#hiveDBMenu").empty();
             for (elem in data) {
                 $("#hiveDBMenu").append('<li><a href="#">'+data[elem]+'</a></li>');
