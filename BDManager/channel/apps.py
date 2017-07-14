@@ -61,7 +61,7 @@ def GetTableDesc(request):
     return JsonResponse(res)
 
 def GetHiveDB(request):
-  conf = {'URL':'10.3.181.235', 'port':10000, 'auth_mechanism':'PLAIN'}
+  conf = {'URL':'10.3.181.235', 'port':10000, 'auth_mechanism':'PLAIN', 'DBName':''}
   res = dict()
   try:
     conn=dbapi.connect(host=conf['URL'], port=conf['port'], auth_mechanism=conf['auth_mechanism'])
@@ -83,8 +83,8 @@ def GetHiveDB(request):
 
 def GetHiveTable(request):
   DBName = request.GET["DBName"]
+  request.session['hiveConf']['DBName'] = DBName
   conf = request.session['hiveConf']
-  conf['DBName'] = DBName
   res = dict()
   try:
     conn=dbapi.connect(host=conf['URL'], port=conf['port'], database=conf['DBName'], auth_mechanism=conf['auth_mechanism'])
