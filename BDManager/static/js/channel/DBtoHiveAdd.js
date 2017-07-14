@@ -228,16 +228,15 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
             $("#hiveDB").focusin(function () {
                 $("#hiveDBMenu").slideDown(100);
                 $("#hiveDBMenu li").unbind();
-                $("#hiveDBMenu").on("mouseenter", "li a", function () {
-                    alert("choice hiveDB");
-                    // $(this).parents("ul").siblings("input").val($(this).val());
+                $("#hiveDBMenu").on("click", "a", function () {
+                    $(this).parents("ul").siblings("input").val($(this).val());
                 });
             });
             $("#hiveDB").focusout(function () {
                 $("#hiveDBMenu").slideUp(100, function () {
                     alert($(this).siblings("#hiveDB").val());
                 });
-                $("#hiveDBMenu").off("mouseenter", "li a");
+                $("#hiveDBMenu").off("click", "a");
             });
 
             $("#saveInfo").click(function () {
