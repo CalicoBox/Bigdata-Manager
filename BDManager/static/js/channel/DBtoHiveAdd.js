@@ -277,7 +277,6 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                     {name: "desc", label: "描述"}
                 ]
             );
-            alert(verifyFlag);
             if (verifyFlag) {
                 var sqoop = {};
                 sqoop.taskName = $("#taskName").val();
@@ -678,7 +677,6 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                 var table = data[elem];
                 $("#zifenpian").append('<tr><td><div class="input-group"><span class="input-group-addon"><input class="choiceTableBtn" type="radio" name="optionsRadios" value="'+table+'"></span><input type="text" class="form-control text-center" data-kuId="1" placeholder="" readonly="readonly" value="'+table+'"><span class="input-group-addon"><span class="glyphicon glyphicon-align-justify seeTableDescBtn"></span></span></div></td></tr>');
             }
-            alert(temp_str);
         },
         getTable: function (table) {
             var _this = this;
