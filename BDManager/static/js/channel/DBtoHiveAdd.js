@@ -251,7 +251,10 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                     var info = {};
                     info["tableName"] = $(this).siblings("input").val();
                     info["DBName"] = $("#hiveDB").val();
-                    _this.getHiveTableDesc(info)
+                    if (info["tableDesc"] != "")
+                        _this.getHiveTableDesc(info);
+                    else
+                        return ;
                 });
                 $("#hiveTableMenu").off("mousedown", "a");
             });
