@@ -158,7 +158,7 @@ def DBtoHive(request):
   res = dict()
   for case in switch(conMode):
     if case('normal'):
-      shell = "sqoop import --connect jdbc:mysql://"+DBConf['URL']+":"+DBConf['port']+"/"+DBConf['DBName']+" --username "+DBConf['account']+" --password "+DBConf['passwd']+" --table "+DBTable+" --hive-import --hive-table "+hiveTable+" --target-dir /user/hive/warehouse/"+hiveDB+".db --columns "+sqoopConf['columns']+" --where '"+sqoopConf['where']+"' --split-by "+sqoopConf['splitBy']
+      shell = "sudo -u hive sqoop import --connect jdbc:mysql://"+DBConf['URL']+":"+DBConf['port']+"/"+DBConf['DBName']+" --username "+DBConf['account']+" --password "+DBConf['passwd']+" --table "+DBTable+" --hive-import --hive-table "+hiveTable+" --hive-database "+hiveDB+" --columns "+sqoopConf['columns']+" --where '"+sqoopConf['where']+"' --split-by "+sqoopConf['splitBy']
       print(shell)
       info = os.system(shell)
       print(info)
