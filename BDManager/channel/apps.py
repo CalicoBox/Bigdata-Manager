@@ -126,23 +126,25 @@ def GetHiveTableDescription(request):
     return JsonResponse(res)
 
 def DBtoHive(request):
-  mode = request.GET['mode']
+  # conMode = request.GET['conMode']
+  conMode = 'normal'
+  importMode = ''
   sqoopConf = request.GET['sqoop']
   DBConf = request.session['dbConf']
   DBTable = request.session['dbTable']
   hiveConf = request.session['hiveConf']
   hiveTable = request.session['hiveTable']
   res = dict()
-  switch (conMode):
-    case 'normal':
+  for case in switch(conMode):
+    if case('normal'):
       shell = "sqoop import --connect jdbc:mysql://"+DBConf['URL']+":"+int(DBConf['port'])+"/"+DBConf['DBName']+" --username "+DBConf['account']+" --password "+DBConf['password']+" --table "+DBTable+" --hive-import --hive-table "+hiveTable+" --columns "+sqoopConf['columns']+" --where"+sqoopConf['where']+" --split-by "+sqoopConf['primaryKey']
       os.system(shell)
       res['success'] = True
       return JsonResponse(res)
-    case 'advanced':
-      switch (importMode):
-        case 'overwrite':
+    if case('advanced'):
+      for case_1 in switch(importMode):
+        if case_1('overwrite'):
           break;
-        case 'incremental':
+        if case_1('incremental'):
           break;
       break;
