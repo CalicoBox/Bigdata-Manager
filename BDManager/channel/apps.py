@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 import json
+import os
 from django.apps import AppConfig
 from django.http import JsonResponse
 from channel.models import UserInfo
@@ -52,32 +53,10 @@ def GetTableDesc(request):
     conn.close()
     res['success'] = True
     res['tableDesc'] = tableDesc
-    request.session['table'] = table
+    request.session['dbTable'] = table
     return JsonResponse(res)
   except MySQLdb.Error,e:
     err = "Mysql Error %d: %s" % (e.args[0], e.args[1])
-    res['success'] = False
-    res['err'] = err
-    return JsonResponse(res)
-
-def GetHiveTableDescription(request):
-  tableName = request.GET["tableName"]
-  DBName = request.GET["DBName"]
-  conf = request.session['hiveConf']
-  res = dict()
-  try:
-    conn=dbapi.connect(host=conf['URL'], port=conf['port'], database=DBName, auth_mechanism=conf['auth_mechanism'])
-    cur=conn.cursor()
-    cur.execute('desc '+tableName)
-    tableDesc = cur.fetchall()
-    cur.close()
-    conn.close()
-    res['success'] = True
-    res['hiveTableDesc'] = tableDesc
-    request.session['hiveTable'] = tableName
-    return JsonResponse(res)
-  except MySQLdb.Error,e:
-    err = "Hive Error %d: %s" % (e.args[0], e.args[1])
     res['success'] = False
     res['err'] = err
     return JsonResponse(res)
@@ -116,10 +95,54 @@ def GetHiveTable(request):
     conn.close()
     res['success'] = True
     res['hiveTables'] = tables
-    request.session['hiveDB'] = DBName
     return JsonResponse(res)
   except MySQLdb.Error,e:
     err = "Hive Error %d: %s" % (e.args[0], e.args[1])
     res['success'] = False
     res['err'] = err
     return JsonResponse(res)
+
+def GetHiveTableDescription(request):
+  tableName = request.GET["tableName"]
+  DBName = request.GET["DBName"]
+  conf = request.session['hiveConf']
+  res = dict()
+  try:
+    conn=dbapi.connect(host=conf['URL'], port=conf['port'], database=DBName, auth_mechanism=conf['auth_mechanism'])
+    cur=conn.cursor()
+    cur.execute('desc '+tableName)
+    tableDesc = cur.fetchall()
+    cur.close()
+    conn.close()
+    res['success'] = True
+    res['hiveTableDesc'] = tableDesc
+    request.session['hiveDB'] = DBName
+    request.session['hiveTable'] = tableName
+    return JsonResponse(res)
+  except MySQLdb.Error,e:
+    err = "Hive Error %d: %s" % (e.args[0], e.args[1])
+    res['success'] = False
+    res['err'] = err
+    return JsonResponse(res)
+
+def DBtoHive(request):
+  mode = request.GET['mode']
+  sqoopConf = request.GET['sqoop']
+  DBConf = request.session['dbConf']
+  DBTable = request.session['dbTable']
+  hiveConf = request.session['hiveConf']
+  hiveTable = request.session['hiveTable']
+  res = dict()
+  switch (conMode):
+    case 'normal':
+      shell = "sqoop import --connect jdbc:mysql://"+DBConf['URL']+":"+int(DBConf['port'])+"/"+DBConf['DBName']+" --username "+DBConf['account']+" --password "+DBConf['password']+" --table "+DBTable+" --hive-import --hive-table "+hiveTable+" --columns "+sqoopConf['columns']+" --where"+sqoopConf['where']+" --split-by "+sqoopConf['primaryKey']
+      os.system(shell)
+      res['success'] = True
+      return JsonResponse(res)
+    case 'advanced':
+      switch (importMode):
+        case 'overwrite':
+          break;
+        case 'incremental':
+          break;
+      break;

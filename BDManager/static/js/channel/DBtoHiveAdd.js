@@ -13,8 +13,6 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
 
         partKey: "",
 
-        hiveTerminated: "",
-
         init: function () {
             this.initEvent();
             this.getHiveDB();
@@ -276,113 +274,72 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                     {name: "desc", label: "描述"}
                 ]
             );
-
+            alert(verifyFlag);
             if (verifyFlag) {
                 var sqoop = {};
-                sqoop.sqoopName = $("#taskName").val();
+                sqoop.taskName = $("#taskName").val();
                 sqoop.administrator = $("#userNames").val();
-                sqoop.dbAbbr = $("#dbjiancheng").val();
-                var zifenpian = $("#zifenpian").find("tr");
 
-                var childSqoop = [];
-                for (var i = 0; i < zifenpian.length; i++) {
-                    var inputs = zifenpian.eq(i).find("input[type=text]");
-                    if (inputs.eq(1).val() == "") {
-                        showTip("DB第" + (i + 1) + "行表不能为空");
-                        return;
-                    }
-                    if (i == 0) {
-                        sqoop.connect = inputs.eq(0).val();
-                        sqoop.table = inputs.eq(1).val();
-                        sqoop.rdbmsDbId = inputs.eq(1).attr("data-kuId");
-                        sqoop.rdbmsTabId = "1";//该字段没用
-                        sqoop.driver = zifenpian.eq(i).find("input[type=hidden]").eq(0).val();
-                        sqoop.username = zifenpian.eq(i).find("input[type=hidden]").eq(1).val();
-                        sqoop.password = zifenpian.eq(i).find("input[type=hidden]").eq(2).val();
-                    } else {
-                        var sq = {};
-                        sq.connect = inputs.eq(0).val();
-                        sq.table = inputs.eq(1).val();
-                        sq.rdbmsDbId = inputs.eq(1).attr("data-kuId");
-                        sq.rdbmsTabId = "1";//该字段没用
-                        sq.driver = zifenpian.eq(i).find("input[type=hidden]").eq(0).val();
-                        sq.username = zifenpian.eq(i).find("input[type=hidden]").eq(1).val();
-                        sq.password = zifenpian.eq(i).find("input[type=hidden]").eq(2).val();
-                        childSqoop.push(sq);
-                    }
-                }
-                sqoop.sqoops = childSqoop;
-                sqoop.hiveDbName = $("#hiveDB").val();
-                sqoop.hiveDbId = $("#hiveDB").attr("data-value");
-                sqoop.hiveTable = $("#hiveTable").val();
-                sqoop.hiveTabId = $("#hiveTable").attr("data-value");
-                sqoop.fieldsTerminatedBy = _this.hiveTerminated;
-
-
-                var columnMappers = [];
+                var columns = "";
                 var selectedElmTrs = $("#selectedElm tr"), hiveElmTrs = $("#hiveElm tr");
                 if (selectedElmTrs.length != hiveElmTrs.length) {
                     showTip("源字段和hive表字段必须一一对应.")
                     return;
                 }
                 for (var k = 0; k < selectedElmTrs.length; k++) {
-                    var ColumnMapper = {};
-                    ColumnMapper.sColName = selectedElmTrs.eq(k).find("td").eq(0).html();
-                    ColumnMapper.sColType = selectedElmTrs.eq(k).find("td").eq(1).html();
-                    ColumnMapper.tColName = hiveElmTrs.eq(k).find("td").eq(0).html();
-                    ColumnMapper.tColType = hiveElmTrs.eq(k).find("td").eq(1).html();
-                    columnMappers.push(ColumnMapper);
+                    var column = "";
+                    column = selectedElmTrs.eq(k).find("td").eq(0).val();
+                    columns += column+",";
                 }
-                sqoop.columnMappers = columnMappers;
+                sqoop.columns = columns;
 
-                sqoop.splitBy = $("#qiefenziduan").val();
+                sqoop.splitBy = $("#spliteKey").val();
                 if ($.trim(sqoop.splitBy) == "") {
-                    showTip("数据切分字段不能为空.")
-                    return;
+                    sqoop.splitBy = "id"
                 }
 
-                if ($("#gaoji").is(":checked")) {
-                    sqoop.numMappers = $("#gaojiConfig").val();
-                    if ($.trim(sqoop.numMappers) == "") {
-                        showTip("数据量高级不能为空.")
-                        return;
-                    }
-                } else {
-                    sqoop.numMappers = $("#shujuliang").val();
-                }
-                sqoop.reduceNumber = $("#shujuliang").val();
+                // if ($("#gaoji").is(":checked")) {
+                //     sqoop.numMappers = $("#gaojiConfig").val();
+                //     if ($.trim(sqoop.numMappers) == "") {
+                //         showTip("数据量高级不能为空.")
+                //         return;
+                //     }
+                // } else {
+                //     sqoop.numMappers = $("#shujuliang").val();
+                // }
+                // sqoop.reduceNumber = $("#shujuliang").val();
 
-                if (this.partKey != "") {
-                    var fenquType = $("input[name='fenquType']:checked").val();
-                    if (fenquType == 0) {
-                        sqoop.partVal = $("#fenqubds").val();
-                        sqoop.partType = 0;
-                        if ($.trim(sqoop.partVal) == "") {
-                            showTip("分区表达式不能为空.")
-                            return;
-                        }
-                    } else {
-                        sqoop.partVal = $("#fenquziduan").val();
-                        if ($.trim(sqoop.partVal) == "") {
-                            showTip("选择分区字段不能为空.")
-                            return;
-                        }
-                        sqoop.partType = 1;
-                    }
-                    sqoop.partKey = _this.partKey;
-                } else {
-                    sqoop.partType = 2;
-                }
+                // if (this.partKey != "") {
+                //     var fenquType = $("input[name='fenquType']:checked").val();
+                //     if (fenquType == 0) {
+                //         sqoop.partVal = $("#fenqubds").val();
+                //         sqoop.partType = 0;
+                //         if ($.trim(sqoop.partVal) == "") {
+                //             showTip("分区表达式不能为空.")
+                //             return;
+                //         }
+                //     } else {
+                //         sqoop.partVal = $("#fenquziduan").val();
+                //         if ($.trim(sqoop.partVal) == "") {
+                //             showTip("选择分区字段不能为空.")
+                //             return;
+                //         }
+                //         sqoop.partType = 1;
+                //     }
+                //     sqoop.partKey = _this.partKey;
+                // } else {
+                //     sqoop.partType = 2;
+                // }
 
                 sqoop.where = $("#where").val();
                 sqoop.describe = $("#desc").val();
 
-                sqoop.sqoopType = "import";
                 sqoop.compressionCodec = "com.hadoop.compression.lzo.LzopCodec";
+                
                 showloading(true);
                 $.ajax({
-                    type: "POST",
-                    url: "/sentosa/transform/sqoop/saveSqoop",
+                    type: "GET",
+                    url: "/channel/DBtoHive",
                     dataType: "json",
                     contentType: 'application/json',
                     data: JSON.stringify(sqoop),
@@ -623,7 +580,6 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                 success: function (result) {
                     showloading(false);
                     if (result && result.success) {
-                        alert(result.hiveTables);
                         _this.setHiveTableElm(result.hiveTableDesc);
                     } else {
                         $.showModal({content: "查询失败"+result.err});

@@ -156,11 +156,11 @@
 							<div class="form-group">
 								<label  class="col-sm-2 control-label">数据切分字段</label>
 								<div class="col-sm-3 input-group-sm">
-									<input type="text" class="form-control" id="qiefenziduan">
+									<input type="text" class="form-control" id="spliteKey" placeholder="默认为id">
 									<span class="glyphicon glyphicon-search quickSearchIcon"></span>
 								</div>
 							</div>
-							<div class="form-group">
+							<!-- <div class="form-group">
 								<label  class="col-sm-2 control-label">数据量</label>
 								<div class="col-sm-3 input-group-sm">
 									<select class="myselect100" id="shujuliang">
@@ -170,7 +170,7 @@
 										<option value="16">500-1000万</option>
 										<option value="32">1000-3000万</option>
 									</select>
-								</div>
+								</div> -->
 								<!-- <div class="col-sm-1">
 									<div class="radio">
 										<label>
@@ -204,18 +204,18 @@
 								<div class="col-sm-3 input-group-sm">
 									<input type="text" class="form-control" id="fenqubds" placeholder="">
 								</div>
-							</div> -->
+							</div>
 							<div class="form-group" id="dongtaifenduDiv" style="display: none;">
 								<label  class="col-sm-2 control-label">选择分区字段</label>
 								<div class="col-sm-3 input-group-sm">
 									<input type="text" class="form-control" id="fenquziduan">
 									<span class="glyphicon glyphicon-search quickSearchIcon"></span>
 								</div>
-							</div>
+							</div> -->
 							<div class="form-group">
-								<label  class="col-sm-2 control-label" style="padding-top:0;">where查询条件</label>
+								<label  class="col-sm-2 control-label" style="padding-top:0;">附加查询条件</label>
 								<div class="col-sm-5 input-group-sm">
-									<textarea class="miaoshu" id="where"></textarea>
+									<textarea class="miaoshu" id="where" placeholder="例如：id >= 1 and name = 'ex'"></textarea>
 								</div>
 								<div class="col-sm-5"></div>
 							</div>
