@@ -157,6 +157,7 @@ def DBtoHive(request):
   for case in switch(conMode):
     if case('normal'):
       shell = "sqoop import --connect jdbc:mysql://"+DBConf['URL']+":"+int(DBConf['port'])+"/"+DBConf['DBName']+" --username "+DBConf['account']+" --password "+DBConf['password']+" --table "+DBTable+" --hive-import --hive-table "+hiveTable+" --columns "+sqoopConf['columns']+" --where"+sqoopConf['where']+" --split-by "+sqoopConf['primaryKey']
+      print(shell)
       os.system(shell)
       res['success'] = True
       print("BD import to hive")
