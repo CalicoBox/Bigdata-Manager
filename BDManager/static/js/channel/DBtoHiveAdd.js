@@ -355,8 +355,7 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                     success: function (result) {
                         showloading(false);
                         if (result && result.success) {
-                            debugger;
-                            location.href = "importDBList.html";
+                            return ;
                         } else {
                             $.showModal({content: "保存失败:"+result.err});
                         }

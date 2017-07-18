@@ -157,11 +157,11 @@ def DBtoHive(request):
   res = dict()
   for case in switch(conMode):
     if case('normal'):
-      shell = "sqoop import --connect jdbc:mysql://"+DBConf['URL']+":"+DBConf['port']+"/"+DBConf['DBName']+" --username "+DBConf['account']+" --password "+DBConf['passwd']+" --table "+DBTable+" --hive-import --hive-table "+hiveTable+" --columns "+sqoopConf['columns']+" --where"+sqoopConf['where']+" --split-by "+sqoopConf['splitBy']
+      shell = "sqoop import --connect jdbc:mysql://"+DBConf['URL']+":"+DBConf['port']+"/"+DBConf['DBName']+" --username "+DBConf['account']+" --password "+DBConf['passwd']+" --table "+DBTable+" --hive-import --hive-table "+hiveTable+" --columns "+sqoopConf['columns']+" --where '"+sqoopConf['where']+"' --split-by "+sqoopConf['splitBy']
       print(shell)
-      os.system(shell)
+      info = os.system(shell)
+      print(info)
       res['success'] = True
-      print("BD import to hive")
       return JsonResponse(res)
     if case('advanced'):
       for case_1 in switch(importMode):
