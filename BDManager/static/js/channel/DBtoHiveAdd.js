@@ -345,7 +345,9 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                     url: "/channel/DBtoHive",
                     dataType: "json",
                     contentType: 'application/json',
-                    data: JSON.stringify(sqoop),
+                    data: {
+                        sqoop:JSON.stringify(sqoop),
+                    },
                     success: function (result) {
                         showloading(false);
                         if (result && result.success) {
