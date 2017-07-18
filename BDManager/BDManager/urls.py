@@ -22,7 +22,7 @@ from usertag.views import TagList, RuleList
 from dataknowledge.views import hivetablelist, tagmanage, timevariableList
 from channel.views import DBtoHiveAdd, DBtoHiveModify, exportDB, exportDBList, exportDBModify, importDBList, importHiveHiveList, upload, uploadInfo, uploadList
 
-from channel.apps import SearchUser, GetDBConnect, GetTableDesc, GetHiveDB, GetHiveTable, GetHiveTableDescription
+from channel.apps import SearchUser, GetDBConnect, GetTableDesc, GetHiveDB, GetHiveTable, GetHiveTableDescription, DBtoHive
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', LoginCheck),
@@ -51,4 +51,5 @@ urlpatterns = [
     url(r'^channel/GetHiveDB', GetHiveDB, name="GetHiveDB"),
     url(r'^channel/GetHiveTableDesc', GetHiveTableDescription, name="GetHiveTableDesc"),
     url(r'^channel/GetHiveTable', GetHiveTable, name="GetHiveTable"),
+    url(r'^channel/DBtoHive', DBtoHive, name="DBtoHive"),
 ]
