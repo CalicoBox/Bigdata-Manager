@@ -346,7 +346,7 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                     dataType: "json",
                     contentType: 'application/json',
                     data: {
-                        sqoop : sqoop,
+                        sqoop:JSON.stringify(sqoop),
                     },
                     success: function (result) {
                         showloading(false);

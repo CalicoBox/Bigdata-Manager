@@ -148,7 +148,8 @@ def DBtoHive(request):
   # conMode = request.GET['conMode']
   conMode = 'normal'
   importMode = ''
-  sqoopConf = request.GET['sqoop']
+  sqoopConf = json.loads(request.GET['sqoop'])
+  print(sqoopConf)
   DBConf = request.session['dbConf']
   DBTable = request.session['dbTable']
   hiveConf = request.session['hiveConf']
