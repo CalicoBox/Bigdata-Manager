@@ -297,6 +297,7 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                         columns += ",";
                     }
                 }
+                alert("!!"+columns);
                 sqoop.columns = columns;
 
                 sqoop.splitBy = $("#spliteKey").val();
