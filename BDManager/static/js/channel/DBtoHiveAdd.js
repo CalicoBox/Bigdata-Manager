@@ -291,8 +291,12 @@ require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSear
                 }
                 for (var k = 0; k < selectedElmTrs.length; k++) {
                     var column = "";
-                    column = selectedElmTrs.eq(k).find("td").eq(0).val();
-                    columns += column+",";
+                    column = selectedElmTrs.eq(k).find("td").eq(0).text();
+                    alerr(column);
+                    columns += column;
+                    if (k < selectedElmTrs.length - 1) {
+                        columns += ",";
+                    }
                 }
                 sqoop.columns = columns;
 
