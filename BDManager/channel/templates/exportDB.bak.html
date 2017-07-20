@@ -15,92 +15,71 @@
 				<div class="box">
 					<form class="form-horizontal">
 						<div class="box-body">
-							<div class="form-group col-sm-6" style="float: right; margin-bottom: 0px;">
-								<div class="col-sm-12">
-									<div class="box mybox fenpianbox" style="margin-bottom: 15px; height: 15em;">
-										<div class="box-body" style="overflow: auto; height: 14em; margin-bottom: 13px;">
-											<table class="table">
-												<!-- 子分片 -->
-												<tbody id="zifenpian">
-												<tr>
-													<td>
-														<div class="input-group">
-		      										<span class="input-group-addon">
-																<input type="radio" name="optionsRadios" value="1">
-		      										</span>
-															<input type="text" class="form-control text-center" data-kuId="1" placeholder="" readonly="readonly">
-															<span class="input-group-addon">
-																<span class="glyphicon glyphicon-align-justify seeTableDescBtn"></span>
-															</span>
-														</div>
-													</td>
-												</tr>
-												</tbody></table>
-										</div>
-									</div>
-								</div>
-								<!-- <div class="col-sm-1 zifenpianfa" >
-									<i class="fa fa-fw fa-plus-square" data-type="add"></i>
-									<i class="fa fa-fw fa-minus-square" data-type="del"></i>
-								</div> -->
-								<!-- <div class="col-sm-4"></div> -->
-							</div>
-							<div class="form-group col-sm-6">
-								<label class="col-sm-4 control-label">任务名</label>
-								<div class="col-sm-8 input-group-sm">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">任务名</label>
+								<div class="col-sm-3 input-group-sm">
 									<input type="text" class="form-control" id="taskName" placeholder="">
 								</div>
+								<div class="col-sm-7"></div>
 							</div>
-							<div class="form-group col-sm-6">
-								<label class="col-sm-4 control-label">负责人</label>
-								<div class="col-sm-8 input-group-sm">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">负责人</label>
+								<div class="col-sm-3 input-group-sm">
 									<input type="text" class="form-control" id="userNames" readonly >
-									<span class="glyphicon glyphicon-plus quickSearchIcon" id="addUserBut"></span>
 								</div>
+								<div class="col-sm-1" style="line-height:30px;padding-left:0;">
+									<i class="fa fa-fw fa-plus" id="addUserBut"></i>
+								</div>
+								<div class="col-sm-6"></div>
 							</div>
-							<div class="form-group col-sm-6">
-								<label  class="col-sm-4 control-label">Hive库</label>
-								<div class="col-sm-8 input-group-sm">
-									<input type="text" class="form-control" id="hiveDB"  placeholder="">
+							<div class="form-group">
+								<label  class="col-sm-2 control-label">Hive库</label>
+								<div class="col-sm-3 input-group-sm">
+									<input type="text" class="form-control" id="hiveKu"  placeholder="">
 									<span class="glyphicon glyphicon-search quickSearchIcon"></span>
-									<ul class="dropdown-menu" id="hiveDBMenu">
-									  <!-- <li><a href="#">Action</a></li> -->
-									</ul>
 								</div>
+								<div class="col-sm-7"></div>
 							</div>
-							<div class="form-group col-sm-6">
-								<label  class="col-sm-4 control-label">Hive表</label>
-								<div class="col-sm-8 input-group-sm">
-									<input type="text" class="form-control" id="hiveTable" placeholder="">
+							<div class="form-group">
+								<label  class="col-sm-2 control-label">Hive表</label>
+								<div class="col-sm-3 input-group-sm">
+									<input type="text" class="form-control" id="hivebiao" placeholder="">
 									<span class="glyphicon glyphicon-search quickSearchIcon"></span>
-									<ul class="dropdown-menu" id="hiveTableMenu">
-									  <!-- <li><a href="#">Action</a></li> -->
-									</ul>
 								</div>
+								<div class="col-sm-7"></div>
 							</div>
-							<div class="form-group col-sm-6">
-								<label class="col-sm-4 control-label">目标数据库</label>
-								<div class="col-sm-8 input-group-sm dropdown">
-									<input type="text" class="form-control" id="globalDB" readonly>
-									<span class="glyphicon glyphicon-plus quickSearchIcon" id="confDBInfoBtn"></span>
+							<div class="form-group">
+								<label  class="col-sm-2 control-label">DB简称</label>
+								<div class="col-sm-3 input-group-sm">
+									<input type="text" class="form-control" id="mubiaoku"  placeholder="">
+									<span class="glyphicon glyphicon-search quickSearchIcon"></span>
 								</div>
+								<div class="col-sm-7"></div>
+							</div>
+							<div class="form-group">
+								<label  class="col-sm-2 control-label">目标表</label>
+								<div class="col-sm-3 input-group-sm">
+									<input type="text" class="form-control" id="mubiaobiao" placeholder="">
+									<span class="glyphicon glyphicon-search quickSearchIcon"></span>
+								</div>
+								<div class="col-sm-7"></div>
 							</div>
 							<div class="form-group">
 								<label  class="col-sm-2 control-label"></label>
 								<div class="col-sm-3 input-group-sm">
-									<div class="box mybox fieldBox operBox">
-										<div class="box-header no-padding">
+									<div class="box mybox operBox">
+										<div class="box-header">
 											<h3 class="box-title">目标表</h3>
 										</div><!-- /.box-header -->
 										<div class="box-body no-padding dingzhitable">
 											<table class="table table-condensed">
 												<thead>
-													<tr>
-														<th>字段名</th>
-														<th>字段类型</th>
-													</tr>
+												<tr>
+													<th>字段名</th>
+													<th>字段类型</th>
+												</tr>
 												</thead>
-												<tbody id="globalTableElm">
+												<tbody id="yuanElm">
 												</tbody></table>
 										</div><!-- /.box-body -->
 									</div>
@@ -110,8 +89,8 @@
 									</div>
 								</div>
 								<div class="col-sm-3 input-group-sm">
-									<div class="box mybox fieldBox operBox">
-										<div class="box-header no-padding">
+									<div class="box mybox operBox">
+										<div class="box-header">
 											<h3 class="box-title">已选字段</h3>
 										</div><!-- /.box-header -->
 										<div class="box-body no-padding dingzhitable">
@@ -125,7 +104,7 @@
 												<tbody id="selectedElm">
 												</tbody></table>
 										</div><!-- /.box-body -->
-									</div>	
+									</div>
 									<div>
 										<a class="btn  btn-default myButton" id="selectedElmAll">全选</a>
 										<a class="btn  btn-default myButton" id="selectedElmDown">下移</a>
@@ -134,8 +113,8 @@
 									</div>
 								</div>
 								<div class="col-sm-3 input-group-sm">
-									<div class="box mybox fieldBox oprshowBox">
-										<div class="box-header no-padding">
+									<div class="box mybox oprshowBox">
+										<div class="box-header">
 											<h3 class="box-title">Hive表</h3>
 										</div><!-- /.box-header -->
 										<div class="box-body no-padding dingzhitable">
@@ -153,7 +132,7 @@
 									</div>
 								</div>
 							</div>
-							<!-- <div class="form-group">
+							<div class="form-group">
 								<label  class="col-sm-2 control-label" style="padding-top:0;">Hive表分区表达式</label>
 								<div class="col-sm-5 input-group-sm">
 									<textarea class="miaoshu" id="hivefentubiaodashi" placeholder="(只能填写partition_dt=${},不能默认是全部导出)"></textarea>
@@ -166,7 +145,7 @@
 									<textarea class="miaoshu" id="where" placeholder="(支持时间表达式,不填则不删表数据)"></textarea>
 								</div>
 								<div class="col-sm-5"></div>
-							</div> -->
+							</div>
 							<div class="form-group">
 								<label  class="col-sm-2 control-label" style="padding-top:0;">描述</label>
 								<div class="col-sm-5 input-group-sm">
@@ -184,12 +163,12 @@
 		</div>
 	</section>
 </div>
-<!-- 选择用户弹窗 -->
-<div class="modal fade" id="userModal" tabindex="-1">
+
+<div class="modal" id="userModal">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 				<h4 class="modal-title">请选择用户</h4>
 			</div>
 			<div class="modal-body">
@@ -206,8 +185,8 @@
 					</div>
 					<div class="box-body no-padding selectUsers">
 						<!--<a class="btn btn-app" data-id="1" data-loginName="guoyan">-->
-							<!--<span class="badge bg-yellow"><i class="fa fa-fw fa-times"></i></span>-->
-							<!--Notifications-->
+						<!--<span class="badge bg-yellow"><i class="fa fa-fw fa-times"></i></span>-->
+						<!--Notifications-->
 						<!--</a>-->
 					</div>
 					<div class="box-body no-padding" style="display: block;">
@@ -224,38 +203,7 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div>
-<!-- 添加数据源弹窗 -->
-<div class="modal fade" id="addDBModal" tabindex="-1">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"><span>×</span></button>
-				<h4 class="modal-title">填写配置信息</h4>
-			</div>
-			<div class="modal-body">
-				<form id="DBConfForm">
-					<div class="form-group">
-						<label for="DBName">DBName</label>
-						<input type="text" class="form-control" id="DBName" placeholder="">
-						<label for="URL">URL</label>
-						<input type="text" class="form-control" id="URL" placeholder="0.0.0.0">
-						<label for="port">Port</label>
-						<input type="text" class="form-control" id="port" placeholder="3306">
-						<label for="account">User</label>
-						<input type="text" class="form-control" id="account" placeholder="">
-						<label for="passwd">Pass Word</label>
-						<input type="password" class="form-control" id="passwd" placeholder="">
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default pull-left closeModal" data-dismiss="modal">关闭</button>
-				<button type="button" class="btn btn-warning" id="tryConnectBtn">未测试</button>
-				<button type="button" class="btn btn-primary" id="addDB">确定</button>
-			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div>
+
 </body>
 <script src="/static/js/channel/exportDB.js"></script>
 </html>

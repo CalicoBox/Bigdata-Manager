@@ -9,7 +9,7 @@ from django.contrib.auth import authenticate, login, logout
 def LoginCheck(request):
     user = request.user
     if user.is_active:
-        return HttpResponseRedirect('/main')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
     return render(request, 'login.html')
 
 @csrf_exempt
@@ -21,7 +21,7 @@ def login_views(request):
     if user is not None:
         if user.is_active:
             login(request, user)
-            return HttpResponseRedirect('/main')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
         else:
             pass
     else:
@@ -31,4 +31,4 @@ def login_views(request):
 @csrf_exempt
 def logout_views(request):
     logout(request)
-    return HttpResponseRedirect('')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))

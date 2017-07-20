@@ -148,6 +148,7 @@ def DBtoHive(request):
   # conMode = request.GET['conMode']
   conMode = 'normal'
   importMode = ''
+
   sqoopConf = json.loads(request.GET['sqoop'])
   print(sqoopConf)
   DBConf = request.session['dbConf']
@@ -164,6 +165,8 @@ def DBtoHive(request):
       print(info)
       res['success'] = True
       return JsonResponse(res)
+
+    #Here is reservered to advanced operations
     if case('advanced'):
       for case_1 in switch(importMode):
         if case_1('overwrite'):

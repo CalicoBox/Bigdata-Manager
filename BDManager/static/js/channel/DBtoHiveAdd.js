@@ -1,11 +1,8 @@
 /**
  * Created by user on 16/6/20.
- * Edited by OJJ on 17/7/17.
+ * Edited by OJJ on 17/7/7.
  */
 require(['jquery','jquery.bootstrap','jquery.datetimepicker','common','quickSearch','app'],function($){
-    $("#addUserBut").click(function () {
-        
-    })    
 
     var channelAdd = {
 

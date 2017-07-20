@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^$', LoginCheck),
     url(r'^login_views', login_views),
     url(r'^main', DefaultView),
+    url(r'^?next=/main', DefaultView),
     url(r'^usertag/TagList', TagList, name='TagList'),
     url(r'^usertag/RuleList', RuleList, name='RuleList'),
     url(r'^dataknowledge/hivetablelist', hivetablelist, name='HiveTableList'),
